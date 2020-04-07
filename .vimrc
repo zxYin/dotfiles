@@ -19,7 +19,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Comment
 Plug 'preservim/nerdcommenter'
 " Complition
-" Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
 " C++
@@ -62,6 +62,9 @@ set number                   " show line number
 set relativenumber           " show relative line number
 set cursorline               " highlight current line
 set wildmenu                 " visual autocomplete for command menu
+set fillchars=vert:\ ,eob:\ ,fold:\            " remove ~ at endBuffer
+
+" set fcs=eob:\       " remove ~ at endBuffer
 " set laststatus=2           " window will always have a status line
 set colorcolumn=81           " set guide line
 set linebreak                " set line break
@@ -90,7 +93,6 @@ highlight CursorLineNr guifg=#a7e004
 if has('nvim')
   highlight SignColumn guibg=bg
   highlight LineNr guibg=bg guifg=#75715f
-  highlight EndOfBuffer guibg=bg guifg=bg
 endif
 
 " Font
@@ -151,15 +153,15 @@ let g:ycm_server_python_interpreter = "/usr/local/bin/python3"
 let g:ycm_python_binary_path = '/usr/local/bin/python3'
 let g:ycm_key_list_stop_completion = [ '<C-y>', '<Enter>' ]
 nnoremap <leader>gt :YcmCompleter GoTo<CR>
+let g:ycm_enable_diagnostic_highlighting = 0
+let g:ycm_error_symbol='\ '
+let g:ycm_warning_symbol='\ '
 highlight YcmErrorLine guibg=#382b23
 highlight YcmWarningLine guibg=#3c3923
 if has('nvim')
   highlight YcmErrorSign guibg=gb guifg=#f92772
   highlight YcmWarningSign guibg=bg guifg=#e6db74
 endif
-let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_error_symbol='▌'
-let g:ycm_warning_symbol='▌'
 
 " nerdcommenter
 " Add spaces after comment delimiters by default

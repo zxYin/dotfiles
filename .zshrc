@@ -1,20 +1,10 @@
 source ~/.bash_profile
 
 # ZSH
-# ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 export ZSH=/Users/yinzixin/.oh-my-zsh
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 source $ZSH/oh-my-zsh.sh
-
-fpath+=$HOME/.zsh/pure
-autoload -U promptinit; promptinit
-zmodload zsh/nearcolor
-PURE_CMD_MAX_EXEC_TIME=10
-zstyle :prompt:pure:git:branch color yellow
-zstyle :prompt:pure:git:arrow color '#272822'
-zstyle :prompt:pure:git:dirty color '#272822'
-zstyle :prompt:pure:execution_time color '#272822'
-prompt pure
 
 alias vim='nvim'
 alias trash="rmtrash"
