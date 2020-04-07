@@ -87,9 +87,9 @@ set termguicolors
 set t_Co=256
 highlight CursorLineNr guifg=#a7e004
 if has('nvim')
-  highlight SignColumn guibg=None
-  highlight LineNr guibg=None guifg=#75715f
-  highlight EndOfBuffer guibg=None guifg=None
+  highlight SignColumn guibg=bg
+  highlight LineNr guibg=bg guifg=#75715f
+  highlight EndOfBuffer guibg=bg guifg=bg
 endif
 
 " Font
@@ -153,8 +153,8 @@ nnoremap <leader>gt :YcmCompleter GoTo<CR>
 highlight YcmErrorLine guibg=#382b23
 highlight YcmWarningLine guibg=#3c3923
 if has('nvim')
-  highlight YcmErrorSign guibg=None guifg=#f92772
-  highlight YcmWarningSign guibg=None guifg=#e6db74
+  highlight YcmErrorSign guibg=gb guifg=#f92772
+  highlight YcmWarningSign guibg=bg guifg=#e6db74
 endif
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_error_symbol='▌'
