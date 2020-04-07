@@ -1,0 +1,6 @@
+-R
+--tag-relative=yes
+--c-kinds=+px
+--c++-kinds=+pxI
+--extra=+q
+--fields=+niazS
