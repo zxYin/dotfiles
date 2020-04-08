@@ -29,6 +29,8 @@ Plug 'puremourning/vimspector'
 Plug 'leafgarland/typescript-vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'Shougo/vimproc.vim', { 'build': 'make -f make_mac.mak' }
+" Git
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 " Performance
@@ -75,7 +77,7 @@ let g:golden_ratio_autocommand = 0 " dont resize automatically
 " set noruler
 " set statusline=\
 " set laststatus=0
-set noshowcmd
+" set noshowcmd
 
 " Window remap
 map <C-j> <C-W>j
