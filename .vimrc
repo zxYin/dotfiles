@@ -62,10 +62,8 @@ set number                   " show line number
 set relativenumber           " show relative line number
 set cursorline               " highlight current line
 set wildmenu                 " visual autocomplete for command menu
-set fillchars=vert:\ ,eob:\ ,fold:\            " remove ~ at endBuffer
-
-" set fcs=eob:\       " remove ~ at endBuffer
-" set laststatus=2           " window will always have a status line
+set showtabline=2            " show tabline
+set laststatus=2             " window will always have a status line
 set colorcolumn=81           " set guide line
 set linebreak                " set line break
 set breakindent              " get same indent as before
@@ -74,6 +72,9 @@ set signcolumn=yes           " always show signcolumns
 set scrolloff=6              " Keep 10 lines above/below cursor
 set noshowmode               " remove status line
 set noruler
+" set fillchars=vert:\ ,eob:\ ,stlnc:▂,stl:▂           " remove ~ at endBuffer
+set fillchars=vert:\ ,eob:\            " remove ~ at endBuffer
+" set statusline=\             " haha
 set laststatus=0
 set noshowcmd
 
@@ -93,6 +94,10 @@ highlight CursorLineNr guifg=#a7e004
 if has('nvim')
   highlight SignColumn guibg=bg
   highlight LineNr guibg=bg guifg=#75715f
+  highlight TabLineFill guifg=bg
+  highlight StatusLineNC guifg=bg guibg=#2D2E27
+  highlight StatusLine guifg=bg guibg=#2D2E27
+  highlight VertSplit guifg=bg guibg=bg
 endif
 
 " Font
@@ -192,6 +197,8 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeAutoDeleteBuffer = 1
 let loaded_netrwPlugin = 1
+let NERDTreeStatusline = ""
+
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | NERDTree | endif

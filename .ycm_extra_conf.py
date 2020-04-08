@@ -16,8 +16,8 @@ BASE_FLAGS = [
         '-DNDEBUG',
         '-I/usr/lib/',
         '-I/usr/include/',
-        '-isystem', '/usr/local/opt/llvm/include',
-        '-isystem', '/usr/local/opt/llvm/include/c++/v1',
+        #  '-isystem', '/usr/local/opt/llvm/include',
+        #  '-isystem', '/usr/local/opt/llvm/include/c++/v1',
         ]
 
 CPP_FLAGS = [

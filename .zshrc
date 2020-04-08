@@ -1,10 +1,15 @@
 source ~/.bash_profile
 
 # ZSH
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 export ZSH=/Users/yinzixin/.oh-my-zsh
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 source $ZSH/oh-my-zsh.sh
+
+fpath+=$HOME/.zsh/pure
+autoload -U promptinit; promptinit
+zstyle :prompt:pure:git:branch color yellow
+prompt pure
 
 alias vim='nvim'
 alias trash="rmtrash"
