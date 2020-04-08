@@ -62,7 +62,6 @@ set number                   " show line number
 set relativenumber           " show relative line number
 set cursorline               " highlight current line
 set wildmenu                 " visual autocomplete for command menu
-set showtabline=2            " show tabline
 set laststatus=2             " window will always have a status line
 set colorcolumn=81           " set guide line
 set linebreak                " set line break
@@ -71,11 +70,11 @@ set numberwidth=5            " make the line number column wider
 set signcolumn=yes           " always show signcolumns
 set scrolloff=6              " Keep 10 lines above/below cursor
 set noshowmode               " remove status line
-set noruler
-" set fillchars=vert:\ ,eob:\ ,stlnc:▂,stl:▂           " remove ~ at endBuffer
 set fillchars=vert:\ ,eob:\            " remove ~ at endBuffer
-" set statusline=\             " haha
-set laststatus=0
+let g:golden_ratio_autocommand = 0 " dont resize automatically
+" set noruler
+" set statusline=\
+" set laststatus=0
 set noshowcmd
 
 " Window remap
@@ -95,9 +94,9 @@ if has('nvim')
   highlight SignColumn guibg=bg
   highlight LineNr guibg=bg guifg=#75715f
   highlight TabLineFill guifg=bg
-  highlight StatusLineNC guifg=bg guibg=#2D2E27
-  highlight StatusLine guifg=bg guibg=#2D2E27
-  highlight VertSplit guifg=bg guibg=bg
+  highlight StatusLineNC guifg=#2D2E27 guibg=#75715f
+  highlight StatusLine guifg=#2D2E27 guibg=#75715f
+  " highlight VertSplit guifg=bg guibg=bg
 endif
 
 " Font
