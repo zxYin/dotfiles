@@ -96,6 +96,8 @@ if has('nvim')
   highlight SignColumn guibg=bg
   highlight LineNr guibg=bg guifg=#75715f
   highlight TabLineFill guifg=bg
+  highlight TabLineSel cterm=bold ctermfg=252 ctermbg=233 gui=bold guifg=#75715f guibg=#2D2E27
+  highlight TabLine guifg=bg guibg=#75715f
   highlight StatusLineNC guifg=#2D2E27 guibg=#75715f
   highlight StatusLine guifg=#2D2E27 guibg=#75715f
   " highlight VertSplit guifg=bg guibg=bg
