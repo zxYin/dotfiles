@@ -65,6 +65,7 @@ set relativenumber           " show relative line number
 set cursorline               " highlight current line
 set wildmenu                 " visual autocomplete for command menu
 set laststatus=2             " window will always have a status line
+set showtabline=2            " window will always have a tab line
 set colorcolumn=81           " set guide line
 set linebreak                " set line break
 set breakindent              " get same indent as before
@@ -167,7 +168,7 @@ let g:ycm_warning_symbol='\ '
 highlight YcmErrorLine guibg=#382b23
 highlight YcmWarningLine guibg=#3c3923
 if has('nvim')
-  highlight YcmErrorSign guibg=gb guifg=#f92772
+  highlight YcmErrorSign guibg=bg guifg=#f92772
   highlight YcmWarningSign guibg=bg guifg=#e6db74
 endif
 
