@@ -46,6 +46,10 @@ set hlsearch        " highlight matche
 set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is lower case
                     " case-sensitive otherwise
+augroup ClearSearch " auto clear highlight
+  autocmd!
+  autocmd InsertEnter * let @/ = ''
+augroup END
 
 " Clipboard
 set clipboard+=unnamedplus
@@ -92,7 +96,7 @@ syntax on
 colorscheme monokai
 set termguicolors
 set t_Co=256
-highlight CursorLineNr guifg=#a7e004
+highlight CursorLineNr guifg=#a7e004 gui=bold
 if has('nvim')
   highlight SignColumn guibg=bg
   highlight LineNr guibg=bg guifg=#75715f
