@@ -12,7 +12,7 @@
             "initializationOptions": {
                 "cache": { "directory": ".ccls-cache" },
                 "client": { "snippetSupport": true },
-                "completion": { "placeholder": false },
+                "completion": { "placeholder": true },
                 "clang": {
                     "excludeArgs": []
                 },
@@ -20,6 +20,12 @@
             }
         }
     },
+    "markdownlint.config": {
+        "line_length": false,
+        "MD001": false
+    },
+    "suggest.enablePreview": true,
+    "suggest.noselect": false,
     "python.autoComplete.addBrackets": true,
     "python.pythonPath": "/usr/local/bin/python3.7",
     "python.condaPath": "/Users/yinzixin/opt/anaconda3/bin/python",
@@ -27,5 +33,9 @@
     "git.addedSign.text": "▌",
     "git.removedSign.text": "▁",
     "git.changeRemovedSign.text": "▁",
-    "git.topRemovedSign.text": "▔"
+    "git.topRemovedSign.text": "▔",
+    "explorer.icon.enableNerdfont": true,
+    "explorer.icon.enableVimDevicons": true,
+    "explorer.quitOnOpen": true,
+    "explorer.file.showHiddenFiles": true
 }

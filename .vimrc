@@ -8,29 +8,32 @@ if has('nvim')
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'wincent/terminus'
-" Brackets Complete
-Plug 'jiangmiao/auto-pairs'
-" File
-Plug 'preservim/nerdtree'
-Plug 'ryanoasis/vim-devicons'
-Plug 'majutsushi/tagbar'
-Plug 'ctrlpvim/ctrlp.vim'
-" Comment
-Plug 'preservim/nerdcommenter'
-" Complition
-Plug 'Valloric/YouCompleteMe'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
-" C++
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'puremourning/vimspector'
-" TypeScript
-Plug 'leafgarland/typescript-vim'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'Shougo/vimproc.vim', { 'build': 'make -f make_mac.mak' }
-" Git
-Plug 'airblade/vim-gitgutter'
+  " UI
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'wincent/terminus'
+  Plug 'terryma/vim-smooth-scroll'
+  " Tools
+  Plug 'junegunn/vim-easy-align'
+  " File
+  Plug 'ryanoasis/vim-devicons'
+  Plug 'majutsushi/tagbar'
+  Plug 'ctrlpvim/ctrlp.vim'
+  " Comment
+  Plug 'preservim/nerdcommenter'
+  " Complition
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'ludovicchabant/vim-gutentags'
+  Plug 'skywind3000/gutentags_plus'
+  " C++
+  Plug 'octol/vim-cpp-enhanced-highlight'
+  Plug 'puremourning/vimspector'
+  " Markdown
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+  " TypeScript
+  Plug 'leafgarland/typescript-vim'
+  Plug 'HerringtonDarkholme/yats.vim'
+  Plug 'Shougo/vimproc.vim', { 'build': 'make -f make_mac.mak' }
 call plug#end()
 
 " Performance
@@ -38,7 +41,7 @@ set hidden
 set nobackup
 set nowritebackup
 set noswapfile
-set updatetime=10
+set updatetime=100
 
 " Search
 set incsearch       " search as characters are entered
@@ -55,9 +58,9 @@ augroup END
 set clipboard+=unnamedplus
 
 " Spaces & Tabs
-set tabstop=2       " number of visual spaces per TAB
-set softtabstop=2   " number of spaces in tab when editing
-set shiftwidth=2    " number of spaces to use for autoindent
+set tabstop=4       " number of visual spaces per TAB
+set softtabstop=4   " number of spaces in tab when editing
+set shiftwidth=4    " number of spaces to use for autoindent
 set expandtab       " tabs are space
 set autoindent
 set copyindent
@@ -69,7 +72,7 @@ set relativenumber           " show relative line number
 set cursorline               " highlight current line
 set wildmenu                 " visual autocomplete for command menu
 set laststatus=2             " window will always have a status line
-set showtabline=2            " window will always have a tab line
+set shortmess+=c             " don't pass messages to ins-completion-menu
 set colorcolumn=81           " set guide line
 set linebreak                " set line break
 set breakindent              " get same indent as before
@@ -82,7 +85,7 @@ let g:golden_ratio_autocommand = 0 " dont resize automatically
 " set noruler
 " set statusline=\
 " set laststatus=0
-" set noshowcmd
+set showcmd
 
 " Window remap
 map <C-j> <C-W>j
@@ -100,16 +103,23 @@ highlight CursorLineNr guifg=#a7e004 gui=bold
 if has('nvim')
   highlight SignColumn guibg=bg
   highlight LineNr guibg=bg guifg=#75715f
-  highlight TabLineFill guifg=bg
-  highlight TabLineSel cterm=bold ctermfg=252 ctermbg=233 gui=bold guifg=#75715f guibg=#2D2E27
-  highlight TabLine guifg=bg guibg=#75715f
+  " highlight TabLineFill guifg=bg
+  " highlight TabLineSel gui=bold guifg=#75715f guibg=#2D2E27
+  " highlight TabLine guifg=bg guibg=#75715f
   highlight StatusLineNC guifg=#2D2E27 guibg=#75715f
   highlight StatusLine guifg=#2D2E27 guibg=#75715f
+  highlight Error guifg=white guibg=#F92772
   " highlight VertSplit guifg=bg guibg=bg
 endif
 
+" Git Color
+highlight DiffDelete guibg=bg guifg=#F97CA9
+highlight DiffAdd guibg=bg guifg=#BEE275
+highlight DiffChange guibg=bg guifg=#96E1EF
+highlight DiffText guibg=bg guifg=#CEB2FF
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
 " Font
-" set guifont=Monaco:h14
 set guifont=Monaco:h14
 
 " Ending Spaces
@@ -131,10 +141,17 @@ map <leader>W :call DeleteTrailingWS()<CR>
 " delete spaces in empty line
 map <F3> :%s/\s*$//g<CR>:noh<CR>''<CR>
 
-" auto-pairs
-" enter coflicts with ycm completion
-let g:AutoPairsMapCR = 0
-inoremap {<CR> {<CR>}<ESC>O
+" Smooth Scroll
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 10, 1)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 1)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 1)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 1)<CR>
+
+" Easy Align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 "" vim-cpp-enhanced-highlight
 let g:cpp_class_scope_highlight = 1
@@ -144,37 +161,6 @@ let g:cpp_posix_standard = 1
 let g:cpp_experimental_template_highlight = 1
 let g:cpp_concepts_highlight = 1
 let c_no_curly_error=1
-
-" git gutter
-let g:gitgutter_sign_added = '▌'
-let g:gitgutter_sign_modified = '▌'
-let g:gitgutter_sign_removed = '▁'
-let g:gitgutter_sign_removed_first_line = '▌'
-let g:gitgutter_sign_modified_removed = '▌'
-let g:gitgutter_map_keys = 0
-let g:gitgutter_realtime = 1
-highlight GitGutterDelete guifg=#F97CA9
-highlight GitGutterAdd    guifg=#BEE275
-highlight GitGutterChange guifg=#96E1EF
-
-" ycm
-let g:ycm_use_clang=1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-let g:ycm_server_python_interpreter = "/usr/local/bin/python3"
-let g:ycm_python_binary_path = '/usr/local/bin/python3'
-let g:ycm_key_list_stop_completion = [ '<C-y>', '<Enter>' ]
-nnoremap <leader>gt :YcmCompleter GoTo<CR>
-let g:ycm_enable_diagnostic_highlighting = 0
-let g:ycm_error_symbol='\ '
-let g:ycm_warning_symbol='\ '
-highlight YcmErrorLine guibg=#382b23
-highlight YcmWarningLine guibg=#3c3923
-if has('nvim')
-  highlight YcmErrorSign guibg=bg guifg=#f92772
-  highlight YcmWarningSign guibg=bg guifg=#e6db74
-endif
 
 " nerdcommenter
 " Add spaces after comment delimiters by default
@@ -196,46 +182,32 @@ let g:NERDToggleCheckAllLines = 1
 nmap <silent>// <leader>c<space>
 vmap <silent>// <leader>c<space>
 
-" NerdTree
-nnoremap <silent>- :NERDTreeToggle<CR>
-nnoremap <Leader>f :NERDTreeFind<CR>
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeQuitOnOpen = 1
-let g:NERDTreeAutoDeleteBuffer = 1
-let loaded_netrwPlugin = 1
-let NERDTreeStatusline = ""
+" file explorer
+nnoremap <silent>- :CocCommand explorer --toggle --sources=buffer-,file+<CR>
+highlight CocExplorerFileDirectory guifg=#999999
+highlight CocExplorerFileDirectoryCollapsed guifg=#999999
 
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") && v:this_session == "" | NERDTree | endif
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
+" Dev icon
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:DevIconsEnableFoldersOpenClose = 1
-let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = '+'
-let g:DevIconsDefaultFolderOpenSymbol = '-'
+let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+" let g:DevIconsEnableFoldersOpenClose = 1
+" let g:DevIconsDefaultFolderOpenSymbol = '-'
 if exists("g:loaded_webdevicons")
-	call webdevicons#refresh()
+  call webdevicons#refresh()
 endif
 
-" change cwd color
-highlight NERDTreeCWD guifg=#E6DB74
-" change + and - color
-highlight NERDTreeFlags guifg=#75715E
-" change all files color to gray
-highlight NERDTreeDir guifg=#E8E8E8
-highlight NERDTreeUp guifg=#E8E8E8
-highlight NERDTreePart guifg=#E8E8E8
-highlight NERDTreeExecFile guifg=#E8E8E8
-highlight NERDTreeFile guifg=#E8E8E8
-highlight NERDTreeIgnore guifg=#E8E8E8
-highlight NERDTreeBookmark guifg=#E8E8E8
-highlight NERDTreeLink guifg=#E8E8E8
-highlight hideBracketsInNerdTree guifg=#E8E8E8
-highlight NERDTreeNodeDelimiters guifg=#E8E8E8
+" Markdown-preview
+nnoremap <c-m> :MarkdownPreview<CR>
+
+" Airline
+let g:airline#extensions#ale#enabled          = 1
+let g:airline#extensions#tabline#enabled      = 1
+let g:airline#extensions#tabline#formatter    = 'unique_tail_improved'
+let g:airline#extensions#bufferline#enabled   = 1
+let g:airline#extensions#gutentags#enabled    = 1
+let g:airline_theme                           = 'superdark'
+let g:airline#extensions#tabline#left_alt_sep = ' '
+let g:airline_left_alt_sep                    = ' '
 
 " gutentags
 noremap <leader>tb :TagbarToggle<CR>
@@ -252,3 +224,170 @@ let g:gutentags_plus_nomap = 1
 
 " Vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
+
+" Coc
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+"
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Introduce function text object
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <TAB> for selections ranges.
+" NOTE: Requires 'textDocument/selectionRange' support from the language server.
+" coc-tsserver, coc-python are the examples of servers that support it.
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+highlight CocErrorLine guibg=#382b23
+highlight CocWarningLine guibg=#3c3923
+highlight CocErrorFloat guifg=#F92772
+highlight CocWarningFloat guifg=#E6DB74
+" highlight CocErrorHighlight cterm=None gui=None ctermfg=None guifg=None
+" highlight CocWarningHighlight cterm=None gui=None ctermfg=None guifg=None
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+  \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Coc snippet
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" let g:coc_snippet_next = '<tab>'
+" ycm
+" let g:ycm_use_clang=1
+" let g:ycm_confirm_extra_conf = 0
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" let g:ycm_server_python_interpreter = "/usr/local/bin/python3"
+" let g:ycm_python_binary_path = '/usr/local/bin/python3'
+" let g:ycm_key_list_stop_completion = [ '<C-y>', '<Enter>' ]
+" nnoremap <leader>gt :YcmCompleter GoTo<CR>
+" let g:ycm_enable_diagnostic_highlighting = 0
+" let g:ycm_error_symbol='\ '
+" let g:ycm_warning_symbol='\ '
+" highlight YcmErrorLine guibg=#382b23
+" highlight YcmWarningLine guibg=#3c3923
+" if has('nvim')
+"   highlight YcmErrorSign guibg=bg guifg=#f92772
+"   highlight YcmWarningSign guibg=bg guifg=#e6db74
+" endif
+
