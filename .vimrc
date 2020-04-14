@@ -15,6 +15,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'terryma/vim-smooth-scroll'
   " Tools
   Plug 'junegunn/vim-easy-align'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
   " File
   Plug 'ryanoasis/vim-devicons'
   Plug 'majutsushi/tagbar'
@@ -370,24 +372,3 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
-
-" let g:coc_snippet_next = '<tab>'
-" ycm
-" let g:ycm_use_clang=1
-" let g:ycm_confirm_extra_conf = 0
-" let g:ycm_autoclose_preview_window_after_completion = 1
-" let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-" let g:ycm_server_python_interpreter = "/usr/local/bin/python3"
-" let g:ycm_python_binary_path = '/usr/local/bin/python3'
-" let g:ycm_key_list_stop_completion = [ '<C-y>', '<Enter>' ]
-" nnoremap <leader>gt :YcmCompleter GoTo<CR>
-" let g:ycm_enable_diagnostic_highlighting = 0
-" let g:ycm_error_symbol='\ '
-" let g:ycm_warning_symbol='\ '
-" highlight YcmErrorLine guibg=#382b23
-" highlight YcmWarningLine guibg=#3c3923
-" if has('nvim')
-"   highlight YcmErrorSign guibg=bg guifg=#f92772
-"   highlight YcmWarningSign guibg=bg guifg=#e6db74
-" endif
-
