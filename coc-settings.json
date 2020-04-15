@@ -34,6 +34,12 @@
     "git.removedSign.text": "▁",
     "git.changeRemovedSign.text": "▁",
     "git.topRemovedSign.text": "▔",
+    "explorer.keyMappings": {
+        "s": "unmap",
+        "E": "unmap",
+        "<c-x>": "open:split",
+        "<c-v>": "open:vsplit"
+    },
     "explorer.icon.enableNerdfont": true,
     "explorer.icon.enableVimDevicons": true,
     "explorer.quitOnOpen": true,

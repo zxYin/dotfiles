@@ -1,10 +1,10 @@
 source ~/.bash_profile
+source ~/.dotfiles/include_path.sh
 
-# ZSH
-# ZSH_THEME="robbyrussell"
 export ZSH=/Users/yinzixin/.oh-my-zsh
-export PATH=$HOME/bin:/usr/local/bin:$PATH
 source $ZSH/oh-my-zsh.sh
+
+export MANPATH=/usr/share/man
 
 fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
@@ -15,61 +15,58 @@ alias vim='nvim'
 alias trash="rmtrash"
 alias rm="echo Use 'trash', or the full path i.e. '/bin/rm'"
 
+# fzf
+export FZF_BASE="$HOME/.fzf"
+export FZF_DEFAULT_OPTS='--color "gutter:#272822,bg+:#272822" --preview "bat --style=numbers --color=always {} | head -500"'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+# Use fd instead of the default find
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf "$@" --preview 'tree -C {} | head -200' ;;
+    export|unset) fzf "$@" --preview "eval 'echo \$'{}" ;;
+    ssh)          fzf "$@" --preview 'dig {}' ;;
+    # *)            fzf "$@" --preview 'bat --style=numbers --color=always {} | head -500' ;;
+    *)            fzf "$@" --preview 'bat --style=numbers --color=always {} ' ;;
+  esac
+}
+
+source ~/.fzf.zsh
+
+source "${HOME}/.zgen/zgen.zsh"
+
+if ! zgen saved; then
+  echo "Creating a zgen save"
+  # zgen oh-my-zsh
+  # plugins
+  zgen load zsh-users/zsh-autosuggestions
+  zgen load zsh-users/zsh-syntax-highlighting
+  zgen load rupa/z
+  zgen load ~/zshfiles/zsh-interactive-cd.plugin.zsh
+  # bulk load
+  zgen loadall <<EOPLUGINS
+    zsh-users/zsh-history-substring-search
+EOPLUGINS
+  # generate the init script from plugins above
+  zgen save
+fi
+
+source ~/.dotfiles/custom.sh
+
 bindkey -v
 bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 bindkey "$terminfo[kcuu1]" history-beginning-search-backward
 bindkey "$terminfo[kcud1]" history-beginning-search-backward
 
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-
-export LDFLAGS="-L/usr/local/opt/bison/lib -L/usr/local/opt/llvm/lib -L/usr/local/opt/flex/lib -L/usr/local/opt/qt/lib"
-export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/flex/include -I/usr/local/opt/openjdk/include -I/usr/local/opt/qt/include"
-# export LDFLAGS="-L/usr/local/opt/bison/lib -L/usr/local/opt/flex/lib -L/usr/local/opt/qt/lib"
-# export CPPFLAGS="-I/usr/local/opt/flex/include -I/usr/local/opt/openjdk/include -I/usr/local/opt/qt/include"
-
-# Qt
-export PATH="/usr/local/opt/qt/bin:$PATH"
-export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"
-# Bison
-export PATH="/usr/local/opt/bison/bin:$PATH"
-# Flex
-export PATH="/usr/local/opt/flex/bin:$PATH"
-# Gatsby
-export PATH="/usr/local/Cellar/node/10.7.0/bin:$PATH"
-# Go
-export GOPATH="/Users/yinzixin/go:$PATH"
-# Openjdk
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-# Java
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk-13.jdk/Contents/Home
-export PATH="$JAVA_HOME/bin:$PATH"
-# RUBUG
-export PATH="/usr/local/opt/ruby/bin:$PATH"
-
-# Git
-plugins=(
-  git
-)
-alias git='LANG=en_GB git'
-
-# z.sh
-source ~/z.sh
-
-# >>> conda init >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$(CONDA_REPORT_ERRORS=false '/Users/yinzixin/opt/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    \eval "$__conda_setup"
-else
-    if [ -f "/Users/yinzixin/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/yinzixin/opt/anaconda3/etc/profile.d/conda.sh"
-        CONDA_CHANGEPS1=false conda activate base
-    else
-        \export PATH="/Users/yinzixin/opt/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda init <<<
-export PATH="/Users/yinzixin/opt/anaconda3/bin:$PATH"
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'

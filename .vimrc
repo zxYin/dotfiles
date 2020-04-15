@@ -20,7 +20,7 @@ call plug#begin('~/.vim/plugged')
   " File
   Plug 'ryanoasis/vim-devicons'
   Plug 'majutsushi/tagbar'
-  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   " Comment
   Plug 'preservim/nerdcommenter'
   " Complition
@@ -155,7 +155,15 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-"" vim-cpp-enhanced-highlight
+" fzf
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+nmap <c-p> :FZF<CR>
+let g:fzf_colors = {
+    \ 'border': ['border', '#272822'],
+    \ 'bg+': ['bg+', '#272822'],
+    \ 'fg': ['fg', 'Comment'] }
+
+" vim-cpp-enhanced-highlight
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
