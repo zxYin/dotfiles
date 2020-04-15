@@ -1,8 +1,8 @@
 source ~/.bash_profile
 source ~/.dotfiles/include_path.sh
 
-export ZSH=/Users/yinzixin/.oh-my-zsh
-source $ZSH/oh-my-zsh.sh
+# export ZSH=/Users/yinzixin/.oh-my-zsh
+# source $ZSH/oh-my-zsh.sh
 
 export MANPATH=/usr/share/man
 
@@ -47,12 +47,11 @@ source "${HOME}/.zgen/zgen.zsh"
 
 if ! zgen saved; then
   echo "Creating a zgen save"
-  # zgen oh-my-zsh
+  zgen oh-my-zsh
   # plugins
   zgen load zsh-users/zsh-autosuggestions
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load rupa/z
-  zgen load ~/zshfiles/zsh-interactive-cd.plugin.zsh
   # bulk load
   zgen loadall <<EOPLUGINS
     zsh-users/zsh-history-substring-search
@@ -68,5 +67,9 @@ bindkey '^[[A' history-beginning-search-backward
 bindkey '^[[B' history-beginning-search-forward
 bindkey "$terminfo[kcuu1]" history-beginning-search-backward
 bindkey "$terminfo[kcud1]" history-beginning-search-backward
+KEYTIMEOUT=1
 
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+
+source ~/zshfiles/zsh-interactive-cd.plugin.zsh
+

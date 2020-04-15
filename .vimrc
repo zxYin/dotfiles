@@ -17,6 +17,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-easy-align'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
+  Plug 'voldikss/vim-floaterm'
   " File
   Plug 'ryanoasis/vim-devicons'
   Plug 'majutsushi/tagbar'
@@ -101,7 +102,7 @@ syntax on
 colorscheme monokai
 set termguicolors
 set t_Co=256
-highlight CursorLineNr guifg=#a7e004 gui=bold
+highlight CursorLineNr guifg=#a7e004 gui=bold guibg=bg
 if has('nvim')
   highlight SignColumn guibg=bg
   highlight LineNr guibg=bg guifg=#75715f
@@ -162,6 +163,12 @@ let g:fzf_colors = {
     \ 'border': ['border', '#272822'],
     \ 'bg+': ['bg+', '#272822'],
     \ 'fg': ['fg', 'Comment'] }
+
+" floaterm
+let g:floaterm_wintitle = v:false
+let g:floaterm_height = 0.7
+let g:floaterm_width = 0.7
+let g:floaterm_keymap_toggle = '<Leader>fn'
 
 " vim-cpp-enhanced-highlight
 let g:cpp_class_scope_highlight = 1
