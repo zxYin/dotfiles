@@ -2,10 +2,8 @@ set nocompatible
 set bs=2
 
 " Python
-if has('nvim')
-  let g:python3_host_prog = "/Users/yinzixin/opt/anaconda3/bin/python"
-  let g:python_host_prog = "/usr/bin/python"
-endif
+let g:python3_host_prog = "/Users/yinzixin/opt/anaconda3/bin/python"
+let g:python_host_prog = "/usr/bin/python"
 
 call plug#begin('~/.vim/plugged')
   " UI
@@ -51,7 +49,7 @@ set incsearch       " search as characters are entered
 set hlsearch        " highlight matche
 set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is lower case
-                    " case-sensitive otherwise
+
 augroup ClearSearch " auto clear highlight
   autocmd!
   autocmd InsertEnter * let @/ = ''
@@ -67,6 +65,8 @@ set shiftwidth=4    " number of spaces to use for autoindent
 set expandtab       " tabs are space
 set autoindent
 set copyindent
+set smartindent
+set cindent
 set shiftround     " Use multiple of shiftwidth when indenting with > and <
 
 " UI Config
@@ -97,23 +97,21 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Color
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 syntax on
 colorscheme monokai
 set termguicolors
 set t_Co=256
 highlight CursorLineNr guifg=#a7e004 gui=bold guibg=bg
-if has('nvim')
-  highlight SignColumn guibg=bg
-  highlight LineNr guibg=bg guifg=#75715f
-  " highlight TabLineFill guifg=bg
-  " highlight TabLineSel gui=bold guifg=#75715f guibg=#2D2E27
-  " highlight TabLine guifg=bg guibg=#75715f
-  highlight StatusLineNC guifg=#2D2E27 guibg=#75715f
-  highlight StatusLine guifg=#2D2E27 guibg=#75715f
-  highlight Error guifg=white guibg=#F92772
-  " highlight VertSplit guifg=bg guibg=bg
-endif
+highlight SignColumn guibg=bg
+highlight LineNr guibg=bg guifg=#75715f
+" highlight TabLineFill guifg=bg
+" highlight TabLineSel gui=bold guifg=#75715f guibg=#2D2E27
+" highlight TabLine guifg=bg guibg=#75715f
+highlight StatusLineNC guifg=#2D2E27 guibg=#75715f
+highlight StatusLine guifg=#2D2E27 guibg=#75715f
+highlight Error guifg=white guibg=#F92772
+" highlight VertSplit guifg=bg guibg=bg
 
 " Git Color
 highlight DiffDelete guibg=bg guifg=#F97CA9
@@ -125,12 +123,9 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " Font
 set guifont=Monaco:h14
 
-" Ending Spaces
-highlight ExtraWhitespace ctermbg=white guibg=#75715f
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+" set lcs+=space:·
+" set list
+" hi Whitespace guifg=#464741
 autocmd BufWinLeave * call clearmatches() " for performance
 
 func! DeleteTrailingWS()
@@ -162,6 +157,7 @@ nmap <c-p> :FZF<CR>
 let g:fzf_colors = {
     \ 'border': ['border', '#272822'],
     \ 'bg+': ['bg+', '#272822'],
+    \ 'info': ['info', '#444444'],
     \ 'fg': ['fg', 'Comment'] }
 
 " floaterm

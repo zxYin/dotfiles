@@ -17,7 +17,8 @@ alias rm="echo Use 'trash', or the full path i.e. '/bin/rm'"
 
 # fzf
 export FZF_BASE="$HOME/.fzf"
-export FZF_DEFAULT_OPTS='--color "gutter:#272822,bg+:#272822" --preview "bat --style=numbers --color=always {} | head -500"'
+export FZF_DEFAULT_OPTS='--color "gutter:#272822,bg+:#272822,info:#444444" --preview "
+\ (bat --style=numbers --color=always {} || tree -C {}) 2> /dev/null | head -200"'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 # Use fd instead of the default find
 _fzf_compgen_path() {
@@ -37,7 +38,8 @@ _fzf_comprun() {
     export|unset) fzf "$@" --preview "eval 'echo \$'{}" ;;
     ssh)          fzf "$@" --preview 'dig {}' ;;
     # *)            fzf "$@" --preview 'bat --style=numbers --color=always {} | head -500' ;;
-    *)            fzf "$@" --preview 'bat --style=numbers --color=always {} ' ;;
+    *)            fzf "$@" --preview '(bat --style=numbers --color=always {} ||
+        \tree -C {}) 2> /dev/null | head -200' ;;
   esac
 }
 
