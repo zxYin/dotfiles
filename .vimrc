@@ -19,7 +19,6 @@ call plug#begin('~/.vim/plugged')
   " File
   Plug 'ryanoasis/vim-devicons'
   Plug 'majutsushi/tagbar'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   " Comment
   Plug 'preservim/nerdcommenter'
   " Complition
@@ -27,8 +26,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'ludovicchabant/vim-gutentags'
   Plug 'skywind3000/gutentags_plus'
   " C++
-  Plug 'octol/vim-cpp-enhanced-highlight'
   Plug 'puremourning/vimspector'
+  Plug 'bfrg/vim-cpp-modern'
   " Markdown
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
   " TypeScript
@@ -152,6 +151,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " fzf
+set rtp+=/usr/local/opt/fzf
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 nmap <c-p> :FZF<CR>
 let g:fzf_colors = {
@@ -166,14 +166,9 @@ let g:floaterm_height = 0.7
 let g:floaterm_width = 0.7
 let g:floaterm_keymap_toggle = '<Leader>fn'
 
-" vim-cpp-enhanced-highlight
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_posix_standard = 1
-let g:cpp_experimental_template_highlight = 1
-let g:cpp_concepts_highlight = 1
-let c_no_curly_error=1
+" vim-cpp-modern
+let g:cpp_simple_highlight = 1
+let g:cpp_named_requirements_highlight = 1
 
 " nerdcommenter
 " Add spaces after comment delimiters by default
@@ -357,6 +352,11 @@ highlight CocErrorLine guibg=#382b23
 highlight CocWarningLine guibg=#3c3923
 highlight CocErrorFloat guifg=#F92772
 highlight CocWarningFloat guifg=#E6DB74
+" highlight CocErrorSign guibg=bg guifg=#F92772
+" highlight CocWarningSign guibg=bg
+highlight link CocErrorSign None
+highlight clear CocWarningSign
+
 " highlight CocErrorHighlight cterm=None gui=None ctermfg=None guifg=None
 " highlight CocWarningHighlight cterm=None gui=None ctermfg=None guifg=None
 

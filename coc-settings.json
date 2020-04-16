@@ -24,6 +24,10 @@
         "line_length": false,
         "MD001": false
     },
+    "diagnostic.warningSign": "",
+    "diagnostic.errorSign": "",
+    "diagnostic.infoSign": "!",
+    "diagnostic.hintSign": "!",
     "suggest.enablePreview": true,
     "suggest.noselect": false,
     "python.autoComplete.addBrackets": true,
