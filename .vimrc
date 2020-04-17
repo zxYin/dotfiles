@@ -1,5 +1,4 @@
 set nocompatible
-set bs=2
 
 " Python
 let g:python3_host_prog = "/Users/yinzixin/opt/anaconda3/bin/python"
@@ -42,6 +41,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set updatetime=100
+set bs=2
 
 " Search
 set incsearch       " search as characters are entered

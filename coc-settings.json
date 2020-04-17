@@ -16,7 +16,7 @@
                 "clang": {
                     "excludeArgs": []
                 },
-                "index": { "threads": 4 }
+                "index": { "threads": 8 }
             }
         }
     },

@@ -16,11 +16,9 @@ alias trash="rmtrash"
 alias rm="echo Use 'trash', or the full path i.e. '/bin/rm'"
 
 # fzf
-# export FZF_BASE="$HOME/.fzf"
 export FZF_BASE=/usr/local/opt/fzf
-export FZF_DEFAULT_OPTS='--color "gutter:#272822,bg+:#272822,info:#444444" --preview "
+export FZF_DEFAULT_OPTS='--height 70% --color "gutter:#272822,bg+:#272822,info:#444444" --preview "
 \ (bat --style=numbers --color=always {} || tree -C {}) 2> /dev/null | head -200"'
-export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 # Use fd instead of the default find
 _fzf_compgen_path() {
@@ -44,8 +42,6 @@ _fzf_comprun() {
         \tree -C {}) 2> /dev/null | head -200' ;;
   esac
 }
-
-source ~/.fzf.zsh
 
 source "${HOME}/.zgen/zgen.zsh"
 
@@ -76,4 +72,4 @@ KEYTIMEOUT=1
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 source ~/zshfiles/zsh-interactive-cd.plugin.zsh
-
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
