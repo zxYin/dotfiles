@@ -35,7 +35,12 @@
           "command": "gopls",
           "rootPatterns": ["go.mod", ".git/"],
           "disableWorkspaceFolders": true,
-          "filetypes": ["go"]
+          "filetypes": ["go"],
+          "initializationOptions": {
+            "usePlaceholders": true,
+            "completeUnimported": true,
+            "deepCompletion": true
+          }
         }
     },
     "markdownlint.config": {

@@ -146,8 +146,6 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 1)<CR>
 
 " Go
 let g:go_def_mapping_enabled = 0
-let g:go_gopls_use_placeholders = 1
-let g:go_gopls_deep_completion = 1
 
 " Easy Align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -215,13 +213,14 @@ highlight CocExplorerFileDirectoryExpanded guifg=#99E1EE
 nnoremap <c-m> :MarkdownPreview<CR>
 
 " Airline
-let g:airline#extensions#ale#enabled          = 1
+let g:airline_extensions = ["tabline", "coc", "tagbar"]
+let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tabline#enabled      = 1
-let g:airline#extensions#tabline#formatter    = 'unique_tail_improved'
-let g:airline#extensions#bufferline#enabled   = 1
+let g:airline#extensions#tabline#formatter    = 'unique_tail'
 let g:airline_theme                           = 'superdark'
-let g:airline#extensions#tabline#left_alt_sep = ' '
-let g:airline_left_alt_sep                    = ' '
+let g:airline_highlighting_cache = 1
 
 " Vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
