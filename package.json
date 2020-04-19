@@ -11,8 +11,9 @@
     "coc-pairs": ">=1.2.21",
     "coc-pyright": ">=1.1.32",
     "coc-python": ">=1.2.9",
+    "coc-snippets": ">=2.1.25",
     "coc-texlab": ">=1.10.4",
-    "coc-tsserver": ">=1.4.15",
-    "coc-vimlsp": ">=0.5.1"
+    "coc-tsserver": ">=1.5.1",
+    "coc-vimlsp": ">=0.5.2"
   }
 }

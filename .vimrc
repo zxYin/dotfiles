@@ -22,8 +22,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'preservim/nerdcommenter'
   " Complition
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'ludovicchabant/vim-gutentags'
-  Plug 'skywind3000/gutentags_plus'
   " C++
   Plug 'puremourning/vimspector'
   Plug 'bfrg/vim-cpp-modern'
@@ -33,6 +31,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'leafgarland/typescript-vim'
   Plug 'HerringtonDarkholme/yats.vim'
   Plug 'Shougo/vimproc.vim', { 'build': 'make -f make_mac.mak' }
+  " Go
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 " Performance
@@ -58,9 +58,9 @@ augroup END
 set clipboard+=unnamedplus
 
 " Spaces & Tabs
-set tabstop=4       " number of visual spaces per TAB
-set softtabstop=4   " number of spaces in tab when editing
-set shiftwidth=4    " number of spaces to use for autoindent
+set tabstop=2       " number of visual spaces per TAB
+set softtabstop=2   " number of spaces in tab when editing
+set shiftwidth=2    " number of spaces to use for autoindent
 set expandtab       " tabs are space
 set autoindent
 set copyindent
@@ -144,6 +144,11 @@ noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 1)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 1)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 1)<CR>
 
+" Go
+let g:go_def_mapping_enabled = 0
+let g:go_gopls_use_placeholders = 1
+let g:go_gopls_deep_completion = 1
+
 " Easy Align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -192,17 +197,19 @@ vmap <silent>// <leader>c<space>
 
 " file explorer
 nnoremap <silent>- :CocCommand explorer --toggle --sources=buffer-,file+<CR>
-highlight CocExplorerFileDirectory guifg=#999999
-highlight CocExplorerFileDirectoryCollapsed guifg=#999999
+highlight CocExplorerFileDirectory guifg=#99E1EE
+highlight CocExplorerFileDirectoryCollapsed guifg=#99E1EE
+highlight CocExplorerFileDirectoryExpanded guifg=#99E1EE
 
 " Dev icon
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+" let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+" " let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
+" let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = '+'
 " let g:DevIconsEnableFoldersOpenClose = 1
 " let g:DevIconsDefaultFolderOpenSymbol = '-'
-if exists("g:loaded_webdevicons")
-  call webdevicons#refresh()
-endif
+" if exists("g:loaded_webdevicons")
+"   call webdevicons#refresh()
+" endif
 
 " Markdown-preview
 nnoremap <c-m> :MarkdownPreview<CR>
@@ -212,41 +219,14 @@ let g:airline#extensions#ale#enabled          = 1
 let g:airline#extensions#tabline#enabled      = 1
 let g:airline#extensions#tabline#formatter    = 'unique_tail_improved'
 let g:airline#extensions#bufferline#enabled   = 1
-let g:airline#extensions#gutentags#enabled    = 1
 let g:airline_theme                           = 'superdark'
 let g:airline#extensions#tabline#left_alt_sep = ' '
 let g:airline_left_alt_sep                    = ' '
-
-" gutentags
-noremap <leader>tb :TagbarToggle<CR>
-let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
-let g:gutentags_ctags_tagfile = '.tags'
-" generate datebases in cache directory, prevent gtags files polluting my project
-let s:vim_tags = expand('~/.cache/tags')
-let g:gutentags_cache_dir = s:vim_tags
-" if cache/tags file doesn't exist, create it
-if !isdirectory(s:vim_tags)
-   silent! call mkdir(s:vim_tags, 'p')
-endif
-let g:gutentags_plus_nomap = 1
 
 " Vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
 
 " Coc
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-"
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~# '\s'
-" endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -354,8 +334,8 @@ highlight CocErrorFloat guifg=#F92772
 highlight CocWarningFloat guifg=#E6DB74
 " highlight CocErrorSign guibg=bg guifg=#F92772
 " highlight CocWarningSign guibg=bg
+highlight! link CocWarningSign None
 highlight link CocErrorSign None
-highlight clear CocWarningSign
 
 " highlight CocErrorHighlight cterm=None gui=None ctermfg=None guifg=None
 " highlight CocWarningHighlight cterm=None gui=None ctermfg=None guifg=None

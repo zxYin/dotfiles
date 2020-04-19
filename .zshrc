@@ -9,6 +9,7 @@ export MANPATH=/usr/share/man
 fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
 zstyle :prompt:pure:git:branch color yellow
+zstyle :prompt:pure:path color cyan
 prompt pure
 
 alias vim='nvim'

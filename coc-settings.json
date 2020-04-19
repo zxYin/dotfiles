@@ -13,21 +13,35 @@
                 "cache": { "directory": ".ccls-cache" },
                 "client": { "snippetSupport": true },
                 "completion": { "placeholder": true },
+                "index": { "threads": 8 },
                 "clang": {
-                    "excludeArgs": []
-                },
-                "index": { "threads": 8 }
+                  "extraArgs": [
+                    "clang++",
+                    "-isystem",
+                    "/usr/local/include",
+                    "-isystem",
+                    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1",
+                    "-isystem",
+                    "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/11.0.3/include",
+                    "-isystem",
+                    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/usr/include",
+                    "%c -std=c17",
+                    "%cpp -std=c++17"
+                  ]
+                }
             }
+        },
+        "golang": {
+          "command": "gopls",
+          "rootPatterns": ["go.mod", ".git/"],
+          "disableWorkspaceFolders": true,
+          "filetypes": ["go"]
         }
     },
     "markdownlint.config": {
         "line_length": false,
         "MD001": false
     },
-    "diagnostic.warningSign": "",
-    "diagnostic.errorSign": "",
-    "diagnostic.infoSign": "!",
-    "diagnostic.hintSign": "!",
     "suggest.enablePreview": true,
     "suggest.noselect": false,
     "python.autoComplete.addBrackets": true,
@@ -45,7 +59,6 @@
         "<c-v>": "open:vsplit"
     },
     "explorer.icon.enableNerdfont": true,
-    "explorer.icon.enableVimDevicons": true,
     "explorer.quitOnOpen": true,
     "explorer.file.showHiddenFiles": true
 }

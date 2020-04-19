@@ -15,7 +15,9 @@ export PATH="/usr/local/opt/flex/bin:$PATH"
 # Gatsby
 export PATH="/usr/local/Cellar/node/10.7.0/bin:$PATH"
 # Go
-export GOPATH="/Users/yinzixin/go:$PATH"
+export GOPATH="/usr/local/Cellar/go/1.14.2_1"
+export GOBIN="$GOPATH/bin"
+export PATH="$GOBIN:$PATH"
 # Openjdk
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 # Java
