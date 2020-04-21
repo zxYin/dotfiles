@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
   " UI
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
+  Plug 'enricobacis/vim-airline-clock'
   Plug 'wincent/terminus'
   Plug 'terryma/vim-smooth-scroll'
   " Tools
@@ -17,7 +18,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'voldikss/vim-floaterm'
   " File
   Plug 'ryanoasis/vim-devicons'
-  Plug 'majutsushi/tagbar'
   " Comment
   Plug 'preservim/nerdcommenter'
   " Complition
@@ -27,10 +27,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'bfrg/vim-cpp-modern'
   " Markdown
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-  " TypeScript
-  Plug 'leafgarland/typescript-vim'
-  Plug 'HerringtonDarkholme/yats.vim'
-  Plug 'Shougo/vimproc.vim', { 'build': 'make -f make_mac.mak' }
   " Go
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
@@ -139,10 +135,10 @@ map <leader>W :call DeleteTrailingWS()<CR>
 map <F3> :%s/\s*$//g<CR>:noh<CR>''<CR>
 
 " Smooth Scroll
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 10, 1)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 10, 1)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 10, 1)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 10, 1)<CR>
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 4, 1)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 4, 1)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 5, 1)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 5, 1)<CR>
 
 " Go
 let g:go_def_mapping_enabled = 0
@@ -213,14 +209,16 @@ highlight CocExplorerFileDirectoryExpanded guifg=#99E1EE
 nnoremap <c-m> :MarkdownPreview<CR>
 
 " Airline
-let g:airline_extensions = ["tabline", "coc", "tagbar"]
+let g:airline_extensions = ["tabline", "clock"]
+let g:airline#extensions#clock#format = '%H:%M:%S'
+let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}%4l%#__restore__#%#__accent_bold#/%L  '
 let g:airline#extensions#tabline#buffer_min_count = 2
-let g:airline#extensions#coc#enabled = 1
-let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tabline#enabled      = 1
 let g:airline#extensions#tabline#formatter    = 'unique_tail'
 let g:airline_theme                           = 'superdark'
 let g:airline_highlighting_cache = 1
+let g:airline#extensions#tabline#left_alt_sep = ' '
+let g:airline_left_alt_sep                    = ' '
 
 " Vimspector
 let g:vimspector_enable_mappings = 'HUMAN'

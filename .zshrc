@@ -1,15 +1,11 @@
 source ~/.bash_profile
 source ~/.dotfiles/include_path.sh
 
-# export ZSH=/Users/yinzixin/.oh-my-zsh
-# source $ZSH/oh-my-zsh.sh
-
 export MANPATH=/usr/share/man
 
 fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
 zstyle :prompt:pure:git:branch color yellow
-zstyle :prompt:pure:path color cyan
 prompt pure
 
 alias vim='nvim'
@@ -55,7 +51,7 @@ if ! zgen saved; then
   zgen load rupa/z
   # bulk load
   zgen loadall <<EOPLUGINS
-    zsh-users/zsh-history-substring-search
+  zsh-users/zsh-history-substring-search
 EOPLUGINS
   # generate the init script from plugins above
   zgen save

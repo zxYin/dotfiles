@@ -12,7 +12,7 @@
             "initializationOptions": {
                 "cache": { "directory": ".ccls-cache" },
                 "client": { "snippetSupport": true },
-                "completion": { "placeholder": true },
+                "completion": { "placeholder": false },
                 "index": { "threads": 8 },
                 "clang": {
                   "extraArgs": [
@@ -33,7 +33,7 @@
         },
         "golang": {
           "command": "gopls",
-          "rootPatterns": ["go.mod", ".git/"],
+          "rootPatterns": ["go.mod", ".git/", ".root"],
           "disableWorkspaceFolders": true,
           "filetypes": ["go"],
           "initializationOptions": {
