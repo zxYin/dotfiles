@@ -5,8 +5,8 @@ let s:want_showmod = get(g:, 'airline_superdark_showmod', 0)
 function! airline#themes#{s:theme}#refresh()
     " Normal
     let N1 = [ '#e8e8e8', '#373832', 254, 237 ]
-    let N3 = [ '#75715f', '#2D2E27', 255, 235 ]
     let N2 = N1
+    let N3 = [ '#75715f', '#2D2E27', 255, 235 ]
 
     " Inactive
     let IA = [ '#75715f', N3[1], 242, N3[3] ]

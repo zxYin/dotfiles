@@ -61,7 +61,6 @@ set copyindent
 set smartindent
 set cindent
 set shiftround     " Use multiple of shiftwidth when indenting with > and <
-
 " UI Config
 set number                   " show line number
 set relativenumber           " show relative line number
@@ -187,26 +186,19 @@ highlight CocExplorerFileDirectory guifg=#99E1EE
 highlight CocExplorerFileDirectoryCollapsed guifg=#99E1EE
 highlight CocExplorerFileDirectoryExpanded guifg=#99E1EE
 
-" Dev icon
-" let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-" " let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = ''
-" let g:WebDevIconsUnicodeDecorateFolderNodesDefaultSymbol = '+'
-" let g:DevIconsEnableFoldersOpenClose = 1
-" let g:DevIconsDefaultFolderOpenSymbol = '-'
-" if exists("g:loaded_webdevicons")
-"   call webdevicons#refresh()
-" endif
-
 " Markdown-preview
 nnoremap <c-m> :MarkdownPreview<CR>
 
 " Airline
-let g:airline_extensions = ["tabline", "coc"]
-let g:airline_section_z = '% %#__accent_bold#%{g:airline_symbols.linenr}%4l%#__restore__#%#__accent_bold#/%L   %{strftime("%H:%M")}'
-let g:airline#extensions#tabline#buffer_min_count = 2
-let g:airline#extensions#coc#enabled = 1
-let airline#extensions#coc#error_symbol = ' '
-let airline#extensions#coc#warning_symbol = ' '
+let g:airline_extensions = ["tabline"]
+let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
+  \%4l:%2c%#__restore__#   %{strftime("%H:%M")}'
+let g:airline_section_b =
+  \'%{airline#extensions#coc#get_error()}
+  \  %{airline#extensions#coc#get_warning()}'
+let g:airline#extensions#coc#error_symbol = ' '
+let g:airline#extensions#coc#warning_symbol = ' '
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline#extensions#tabline#enabled      = 1
 let g:airline#extensions#tabline#formatter    = 'unique_tail'
 let g:airline_theme                           = 'superdark'
