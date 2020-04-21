@@ -8,14 +8,12 @@ call plug#begin('~/.vim/plugged')
   " UI
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  Plug 'enricobacis/vim-airline-clock'
   Plug 'wincent/terminus'
   Plug 'terryma/vim-smooth-scroll'
   " Tools
   Plug 'junegunn/vim-easy-align'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
-  Plug 'voldikss/vim-floaterm'
   " File
   Plug 'ryanoasis/vim-devicons'
   " Comment
@@ -159,12 +157,6 @@ let g:fzf_colors = {
     \ 'info': ['info', '#444444'],
     \ 'fg': ['fg', 'Comment'] }
 
-" floaterm
-let g:floaterm_wintitle = v:false
-let g:floaterm_height = 0.7
-let g:floaterm_width = 0.7
-let g:floaterm_keymap_toggle = '<Leader>fn'
-
 " vim-cpp-modern
 let g:cpp_simple_highlight = 1
 let g:cpp_named_requirements_highlight = 1
@@ -209,10 +201,12 @@ highlight CocExplorerFileDirectoryExpanded guifg=#99E1EE
 nnoremap <c-m> :MarkdownPreview<CR>
 
 " Airline
-let g:airline_extensions = ["tabline", "clock"]
-let g:airline#extensions#clock#format = '%H:%M:%S'
-let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}%4l%#__restore__#%#__accent_bold#/%L  '
+let g:airline_extensions = ["tabline", "coc"]
+let g:airline_section_z = '% %#__accent_bold#%{g:airline_symbols.linenr}%4l%#__restore__#%#__accent_bold#/%L   %{strftime("%H:%M")}'
 let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline#extensions#coc#enabled = 1
+let airline#extensions#coc#error_symbol = ' '
+let airline#extensions#coc#warning_symbol = ' '
 let g:airline#extensions#tabline#enabled      = 1
 let g:airline#extensions#tabline#formatter    = 'unique_tail'
 let g:airline_theme                           = 'superdark'

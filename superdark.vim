@@ -33,7 +33,8 @@ function! airline#themes#{s:theme}#refresh()
     let palette.insert   = palette.normal
     let palette.replace  = palette.normal
     let palette.visual   = palette.normal
-    let palette.inactive = airline#themes#generate_color_map(IA, IA, IA)
+    " let palette.inactive = airline#themes#generate_color_map(IA, IA, IA)
+    let palette.inactive = palette.normal
 
     if s:want_showmod
         let palette.normal_modified = { 'airline_a': NR, 'airline_z': NR }
