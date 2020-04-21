@@ -190,12 +190,24 @@ highlight CocExplorerFileDirectoryExpanded guifg=#99E1EE
 nnoremap <c-m> :MarkdownPreview<CR>
 
 " Airline
+function! Coc_get_error_warning()
+  let errorMes = airline#extensions#coc#get_error()
+  let warningMes = airline#extensions#coc#get_warning()
+  if errorMes != '' && warningMes != ''
+    return errorMes."  ".warningMes
+  elseif errorMes != ''
+    return errorMes
+  elseif warningMes != ''
+    return warningMes
+  else
+    return ''
+  endif
+endfunction
+
 let g:airline_extensions = ["tabline"]
 let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
   \%4l:%2c%#__restore__#   %{strftime("%H:%M")}'
-let g:airline_section_b =
-  \'%{airline#extensions#coc#get_error()}
-  \  %{airline#extensions#coc#get_warning()}'
+let g:airline_section_b = '%{Coc_get_error_warning()}'
 let g:airline#extensions#coc#error_symbol = ' '
 let g:airline#extensions#coc#warning_symbol = ' '
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
