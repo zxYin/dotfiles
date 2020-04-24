@@ -1,8 +1,11 @@
 export PATH=/usr/local/bin:$PATH
 
-# export LDFLAGS="-L/usr/local/opt/bison/lib -L/usr/local/opt/llvm/lib -L/usr/local/opt/flex/lib -L/usr/local/opt/qt/lib"
-# export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/flex/include -I/usr/local/opt/openjdk/include -I/usr/local/opt/qt/include"
+# export LDFLAGS="-L/usr/local/opt/bison/lib -L/usr/local/opt/llvm/lib -L/usr/local/opt/flex/lib -L/usr/local/opt/qt/lib" export CPPFLAGS="-I/usr/local/opt/llvm/include -I/usr/local/opt/flex/include -I/usr/local/opt/openjdk/include -I/usr/local/opt/qt/include"
 
+# LLVM
+# export LDFLAGS="-L/usr/local/opt/llvm/lib"
+# export CPPFLAGS="-I/usr/local/opt/llvm/include"
+# export PATH="/usr/local/opt/llvm/bin:$PATH"
 # Qt
 # export PATH="/usr/local/opt/qt/bin:$PATH"
 # export PKG_CONFIG_PATH="/usr/local/opt/qt/lib/pkgconfig"

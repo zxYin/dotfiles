@@ -14,6 +14,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/vim-easy-align'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
+  Plug 'triglav/vim-visual-increment'
+  Plug 'takac/vim-hardtime'
   " File
   Plug 'ryanoasis/vim-devicons'
   " Comment
@@ -22,12 +24,20 @@ call plug#begin('~/.vim/plugged')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " C++
   Plug 'puremourning/vimspector'
+  Plug 'skywind3000/asynctasks.vim'
+  Plug 'skywind3000/asyncrun.vim'
   Plug 'bfrg/vim-cpp-modern'
   " Markdown
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
   " Go
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
+
+" HardTime
+let g:hardtime_default_on = 1
+let g:list_of_normal_keys = ["h", "j", "k", "l"]
+let g:list_of_visual_keys = ["h", "j", "k", "l"]
+let g:list_of_insert_keys = []
 
 " Performance
 set hidden
@@ -36,6 +46,7 @@ set nowritebackup
 set noswapfile
 set updatetime=100
 set bs=2
+set ma
 
 " Search
 set incsearch       " search as characters are entered
@@ -48,19 +59,21 @@ augroup ClearSearch " auto clear highlight
   autocmd InsertEnter * let @/ = ''
 augroup END
 
-" Clipboard
+" Tools
 set clipboard+=unnamedplus
+set nrformats=alpha
 
 " Spaces & Tabs
-set tabstop=2       " number of visual spaces per TAB
-set softtabstop=2   " number of spaces in tab when editing
-set shiftwidth=2    " number of spaces to use for autoindent
+set tabstop=4       " number of visual spaces per TAB
+set softtabstop=4   " number of spaces in tab when editing
+set shiftwidth=4    " number of spaces to use for autoindent
 set expandtab       " tabs are space
 set autoindent
 set copyindent
 set smartindent
 set cindent
 set shiftround     " Use multiple of shiftwidth when indenting with > and <
+
 " UI Config
 set number                   " show line number
 set relativenumber           " show relative line number
@@ -127,9 +140,6 @@ func! DeleteTrailingWS()
 endfunc
 " auto delete useless spaces
 au BufWrite * :call DeleteTrailingWS()
-map <leader>W :call DeleteTrailingWS()<CR>
-" delete spaces in empty line
-map <F3> :%s/\s*$//g<CR>:noh<CR>''<CR>
 
 " Smooth Scroll
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 4, 1)<CR>
@@ -145,6 +155,13 @@ let g:go_def_mapping_enabled = 0
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" asynctasks & asyncrun
+noremap <silent><F1> :AsyncTask file-build<CR>
+noremap <silent><F2> :AsyncTask file-run<CR>
+let g:asyncrun_open = 6
+let g:asynctasks_term_pos = "bottom"
+let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
 
 " fzf
 set rtp+=/usr/local/opt/fzf
@@ -186,9 +203,6 @@ highlight CocExplorerFileDirectory guifg=#99E1EE
 highlight CocExplorerFileDirectoryCollapsed guifg=#99E1EE
 highlight CocExplorerFileDirectoryExpanded guifg=#99E1EE
 
-" Markdown-preview
-nnoremap <c-m> :MarkdownPreview<CR>
-
 " Airline
 function! Coc_get_error_warning()
   let errorMes = airline#extensions#coc#get_error()
@@ -206,20 +220,38 @@ endfunction
 
 let g:airline_extensions = ["tabline"]
 let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
-  \%4l:%2c%#__restore__#   %{strftime("%H:%M")}'
-let g:airline_section_b = '%{Coc_get_error_warning()}'
-let g:airline#extensions#coc#error_symbol = ' '
-let g:airline#extensions#coc#warning_symbol = ' '
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-let g:airline#extensions#tabline#enabled      = 1
-let g:airline#extensions#tabline#formatter    = 'unique_tail'
-let g:airline_theme                           = 'superdark'
-let g:airline_highlighting_cache = 1
-let g:airline#extensions#tabline#left_alt_sep = ' '
-let g:airline_left_alt_sep                    = ' '
+  \%4l:%2c%#__restore__#  %{strftime("%H:%M")}'
+
+let g:airline_section_b                            = '%{Coc_get_error_warning()}'
+let g:airline#extensions#coc#error_symbol          = ' '
+let g:airline#extensions#coc#warning_symbol        = ' '
+" let g:airline#parts#ffenc#skip_expected_string     = 'utf-8[unix]'
+let g:airline#extensions#tabline#enabled           = 1
+let g:airline#extensions#tabline#formatter         = 'unique_tail_improved'
+let g:airline_theme                                = 'superdark'
+let g:airline_highlighting_cache                   = 1
+let g:airline#extensions#tabline#tabs_label        = ''
+let g:airline#extensions#tabline#buffers_label     = ''
+
+let g:airline#extensions#tabline#show_close_button = 0
+
+let g:airline_left_alt_sep                         = ' '
+let g:airline#extensions#tabline#left_alt_sep      = ' '
 
 " Vimspector
-let g:vimspector_enable_mappings = 'HUMAN'
+" let g:vimspector_enable_mappings = 'HUMAN'
+nmap <silent><F5> <Plug>VimspectorContinue
+nmap <silent><F3> :VimspectorReset<CR>
+nmap <silent><F4> <Plug>VimspectorRestart
+nmap <silent><F6> <Plug>VimspectorPause
+nmap <silent><F9> <Plug>VimspectorToggleBreakpoint
+nmap <silent><F10> <Plug>VimspectorStepOver
+nmap <silent><F11> <Plug>VimspectorStepInto
+nmap <silent><F12> <Plug>VimspectorStepOut
+
+sign define vimspectorBP text=● texthl=Statement
+sign define vimspectorBPDisabled text=◯ texthl=Statement
+sign define vimspectorPC text=▶ texthl=CursorLineNr
 
 " Coc
 

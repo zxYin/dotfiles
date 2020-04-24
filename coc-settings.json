@@ -11,8 +11,8 @@
             "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".root"],
             "initializationOptions": {
                 "cache": { "directory": ".ccls-cache" },
-                "client": { "snippetSupport": true },
-                "completion": { "placeholder": false },
+                "client": {"snippetSupport": true },
+                "completion": {"placeholder": false },
                 "index": { "threads": 8 },
                 "clang": {
                   "extraArgs": [
@@ -51,7 +51,10 @@
     "suggest.noselect": false,
     "python.autoComplete.addBrackets": true,
     "python.pythonPath": "/usr/local/bin/python3.7",
+    "python.jediEnabled": false,
     "python.condaPath": "/Users/yinzixin/opt/anaconda3/bin/python",
+    "java.completion.guessMethodArguments": true,
+    "java.home": "/Library/Java/JavaVirtualMachines/openjdk-13.jdk/Contents/Home",
     "git.changedSign.text": "▌",
     "git.addedSign.text": "▌",
     "git.removedSign.text": "▁",

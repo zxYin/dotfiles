@@ -1,18 +1,17 @@
 {
   "dependencies": {
-    "coc-browser": ">=1.2.6",
     "coc-cmake": ">=0.0.1",
     "coc-explorer": ">=0.4.1",
     "coc-git": ">=1.7.9",
     "coc-highlight": ">=1.2.5",
-    "coc-java": ">=1.4.9",
+    "coc-java": ">=1.4.10",
     "coc-json": ">=1.2.5",
     "coc-markdownlint": ">=1.2.0",
     "coc-pairs": ">=1.2.21",
-    "coc-pyright": ">=1.1.33",
-    "coc-python": ">=1.2.9",
-    "coc-snippets": ">=2.1.25",
-    "coc-texlab": ">=1.10.4",
+    "coc-pyright": ">=1.1.34",
+    "coc-python": ">=1.2.12",
+    "coc-snippets": ">=2.1.26",
+    "coc-texlab": ">=2.0.0",
     "coc-tsserver": ">=1.5.1",
     "coc-vimlsp": ">=0.5.2"
   }
