@@ -1,7 +1,5 @@
-source ~/.bash_profile
+# source ~/.bash_profile
 source ~/.dotfiles/include_path.sh
-
-export MANPATH=/usr/share/man
 
 fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit

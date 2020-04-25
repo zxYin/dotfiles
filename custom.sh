@@ -12,10 +12,6 @@ zz() {
   cd "$(_z -l 2>&1 | sed 's/^[0-9,.]* *//' | fzf -q "$_last_z_args")"
 }
 
-,man() {
-    f=$(fd . $MANPATH/man${1:-1} -t f -x echo {/.} | fzf) && man $f
-}
-
 # Modified version where you can press
 #   - CTRL-O to open with `open` command,
 #   - CTRL-V or Enter key to open with the $EDITOR

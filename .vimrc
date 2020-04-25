@@ -104,25 +104,27 @@ map <C-l> <C-W>l
 " Color
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 syntax on
-colorscheme monokai
 set termguicolors
-set t_Co=256
-highlight CursorLineNr guifg=#a7e004 gui=bold guibg=bg
-highlight SignColumn guibg=bg
-highlight LineNr guibg=bg guifg=#75715f
+colorscheme monokai
+" set t_Co=256
+highlight CursorLineNr guifg=#a7e004 gui=bold guibg=none
+highlight SignColumn guibg=none
+highlight LineNr guibg=none guifg=#75715f
 " highlight TabLineFill guifg=bg
 " highlight TabLineSel gui=bold guifg=#75715f guibg=#2D2E27
 " highlight TabLine guifg=bg guibg=#75715f
 highlight StatusLineNC guifg=#2D2E27 guibg=#75715f
 highlight StatusLine guifg=#2D2E27 guibg=#75715f
 highlight Error guifg=white guibg=#F92772
+highlight Normal guibg=none
+highlight NonText guibg=none
 " highlight VertSplit guifg=bg guibg=bg
 
 " Git Color
-highlight DiffDelete guibg=bg guifg=#F97CA9
-highlight DiffAdd guibg=bg guifg=#BEE275
-highlight DiffChange guibg=bg guifg=#96E1EF
-highlight DiffText guibg=bg guifg=#CEB2FF
+highlight DiffDelete guibg=none guifg=#F97CA9
+highlight DiffAdd guibg=none guifg=#BEE275
+highlight DiffChange guibg=none guifg=#96E1EF
+highlight DiffText guibg=none guifg=#CEB2FF
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Font
@@ -194,8 +196,8 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
-nmap <silent>// <leader>c<space>
-vmap <silent>// <leader>c<space>
+nmap <silent><c-_> <leader>c<space>
+vmap <silent><c-_> <leader>c<space>
 
 " file explorer
 nnoremap <silent>- :CocCommand explorer --toggle --sources=buffer-,file+<CR>
@@ -208,11 +210,11 @@ function! Coc_get_error_warning()
   let errorMes = airline#extensions#coc#get_error()
   let warningMes = airline#extensions#coc#get_warning()
   if errorMes != '' && warningMes != ''
-    return errorMes."  ".warningMes
+    return " ".errorMes."  ".warningMes." "
   elseif errorMes != ''
-    return errorMes
+    return " ".errorMes." "
   elseif warningMes != ''
-    return warningMes
+    return " ".warningMes." "
   else
     return ''
   endif
@@ -220,7 +222,9 @@ endfunction
 
 let g:airline_extensions = ["tabline"]
 let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
-  \%4l:%2c%#__restore__#  %{strftime("%H:%M")}'
+  \%4l:%2c%#__restore__# '
+" let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
+"   \%4l:%2c%#__restore__#  %{strftime("%H:%M")}'
 
 let g:airline_section_b                            = '%{Coc_get_error_warning()}'
 let g:airline#extensions#coc#error_symbol          = ' '
@@ -362,7 +366,9 @@ highlight CocWarningFloat guifg=#E6DB74
 " highlight CocErrorSign guibg=bg guifg=#F92772
 " highlight CocWarningSign guibg=bg
 highlight! link CocWarningSign None
-highlight link CocErrorSign None
+highlight! link CocInfoSign None
+highlight! link CocHintSign None
+highlight! link CocErrorSign None
 
 " highlight CocErrorHighlight cterm=None gui=None ctermfg=None guifg=None
 " highlight CocWarningHighlight cterm=None gui=None ctermfg=None guifg=None
