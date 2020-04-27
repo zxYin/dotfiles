@@ -92,7 +92,8 @@ set numberwidth=5            " make the line number column wider
 set signcolumn=yes           " always show signcolumns
 set scrolloff=6              " Keep 10 lines above/below cursor
 set noshowmode               " remove status line
-set fillchars=vert:\ ,eob:\            " remove ~ at endBuffer
+" set fillchars=vert:\ ,eob:\            " remove ~ at endBuffer
+set fillchars=eob:\            " remove ~ at endBuffer
 let g:golden_ratio_autocommand = 0 " dont resize automatically
 " set noruler
 " set statusline=\
@@ -119,6 +120,7 @@ highlight CursorLineNr guifg=#A9B665 gui=bold guibg=none
 highlight SignColumn guibg=none
 highlight Normal guibg=none
 highlight NonText guibg=none
+highlight VertSplit guifg=#46413E
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 " }}}
@@ -228,8 +230,8 @@ function! Coc_get_error_warning()
 endfunction
 
 let g:airline_extensions = ["tabline"]
-let g:airline_section_z = '%2p%% %#__accent_bold#%{g:airline_symbols.linenr}
-  \%#__restore__#%3l:%2c'
+let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
+  \%#__restore__#%4l:%2c'
 " let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
 "   \%4l:%2c%#__restore__#  %{strftime("%H:%M")}'
 let g:airline_section_b                            = '%{Coc_get_error_warning()}'
@@ -245,9 +247,6 @@ let g:airline#extensions#tabline#show_close_button = 0
 
 let g:airline_left_alt_sep                         = ' '
 let g:airline#extensions#tabline#left_alt_sep      = ' '
-
-" highlight! airline_tabsel gui=none cterm=none term=none
-" highlight! link airline_tablabel airline_tabsel
 " }}}
 " Vimspector: {{{
 " let g:vimspector_enable_mappings = 'HUMAN'
@@ -260,8 +259,9 @@ nmap <silent><F10> <Plug>VimspectorStepOver
 nmap <silent><F11> <Plug>VimspectorStepInto
 nmap <silent><F12> <Plug>VimspectorStepOut
 
-sign define vimspectorBP text=● texthl=Statement
-sign define vimspectorBPDisabled text=◯ texthl=Statement
+highlight VimSpectorBreakPoint guifg=#EA6962
+sign define vimspectorBP text=● texthl=VimSpectorBreakPoint
+sign define vimspectorBPDisabled text=◯ texthl=VimSpectorBreakPoint
 sign define vimspectorPC text=▶ texthl=CursorLineNr
 " }}}
 " Coc: {{{
