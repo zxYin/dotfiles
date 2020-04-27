@@ -10,6 +10,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline-themes'
   Plug 'wincent/terminus'
   Plug 'terryma/vim-smooth-scroll'
+  Plug 'sainnhe/gruvbox-material'
   " Tools
   Plug 'junegunn/vim-easy-align'
   Plug 'tpope/vim-surround'
@@ -102,33 +103,28 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Color
-" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 syntax on
+set t_Co=256
 set termguicolors
-colorscheme monokai
-" set t_Co=256
-highlight CursorLineNr guifg=#a7e004 gui=bold guibg=none
+set background=dark
+let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_enable_italic = 1
+colorscheme gruvbox-material
+
+highlight CursorLineNr guifg=#A9B665 gui=bold guibg=none
 highlight SignColumn guibg=none
-highlight LineNr guibg=none guifg=#75715f
-" highlight TabLineFill guifg=bg
-" highlight TabLineSel gui=bold guifg=#75715f guibg=#2D2E27
-" highlight TabLine guifg=bg guibg=#75715f
-highlight StatusLineNC guifg=#2D2E27 guibg=#75715f
-highlight StatusLine guifg=#2D2E27 guibg=#75715f
-highlight Error guifg=white guibg=#F92772
 highlight Normal guibg=none
 highlight NonText guibg=none
-" highlight VertSplit guifg=bg guibg=bg
 
 " Git Color
-highlight DiffDelete guibg=none guifg=#F97CA9
-highlight DiffAdd guibg=none guifg=#BEE275
-highlight DiffChange guibg=none guifg=#96E1EF
-highlight DiffText guibg=none guifg=#CEB2FF
+highlight RedSign guibg=none
+highlight GreenSign guibg=none
+highlight BlueSign guibg=none
+highlight PurpleSign guibg=none
+highlight YellowSign guibg=none
+highlight OrangeSign guibg=none
+highlight AquaSign guibg=none
 autocmd FileType json syntax match Comment +\/\/.\+$+
-
-" Font
-set guifont=Monaco:h14
 
 " set lcs+=space:·
 " set list
@@ -170,9 +166,9 @@ set rtp+=/usr/local/opt/fzf
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 nmap <c-p> :FZF<CR>
 let g:fzf_colors = {
-    \ 'border': ['border', '#272822'],
-    \ 'bg+': ['bg+', '#272822'],
-    \ 'info': ['info', '#444444'],
+    \ 'border': ['border', '#32302F'],
+    \ 'bg+': ['bg+', '#32302F'],
+    \ 'info': ['info', '#CBB795'],
     \ 'fg': ['fg', 'Comment'] }
 
 " vim-cpp-modern
@@ -201,9 +197,6 @@ vmap <silent><c-_> <leader>c<space>
 
 " file explorer
 nnoremap <silent>- :CocCommand explorer --toggle --sources=buffer-,file+<CR>
-highlight CocExplorerFileDirectory guifg=#99E1EE
-highlight CocExplorerFileDirectoryCollapsed guifg=#99E1EE
-highlight CocExplorerFileDirectoryExpanded guifg=#99E1EE
 
 " Airline
 function! Coc_get_error_warning()
@@ -222,25 +215,28 @@ endfunction
 
 let g:airline_extensions = ["tabline"]
 let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
-  \%4l:%2c%#__restore__# '
+  \%#__restore__#%4l:%2c '
 " let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
 "   \%4l:%2c%#__restore__#  %{strftime("%H:%M")}'
 
 let g:airline_section_b                            = '%{Coc_get_error_warning()}'
-let g:airline#extensions#coc#error_symbol          = ' '
-let g:airline#extensions#coc#warning_symbol        = ' '
+let g:airline#extensions#coc#error_symbol          = 'E: '
+let g:airline#extensions#coc#warning_symbol        = 'W: '
 " let g:airline#parts#ffenc#skip_expected_string     = 'utf-8[unix]'
 let g:airline#extensions#tabline#enabled           = 1
 let g:airline#extensions#tabline#formatter         = 'unique_tail_improved'
-let g:airline_theme                                = 'superdark'
+let g:airline_theme                                = 'gruvbox_material'
 let g:airline_highlighting_cache                   = 1
 let g:airline#extensions#tabline#tabs_label        = ''
-let g:airline#extensions#tabline#buffers_label     = ''
+let g:airline#extensions#tabline#buffers_label     = '%{strftime("%H:%M")}'
 
 let g:airline#extensions#tabline#show_close_button = 0
 
 let g:airline_left_alt_sep                         = ' '
 let g:airline#extensions#tabline#left_alt_sep      = ' '
+
+highlight! airline_tabsel gui=none cterm=none term=none
+highlight! link airline_tablabel airline_tabsel
 
 " Vimspector
 " let g:vimspector_enable_mappings = 'HUMAN'
@@ -359,12 +355,8 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-highlight CocErrorLine guibg=#382b23
-highlight CocWarningLine guibg=#3c3923
-highlight CocErrorFloat guifg=#F92772
-highlight CocWarningFloat guifg=#E6DB74
-" highlight CocErrorSign guibg=bg guifg=#F92772
-" highlight CocWarningSign guibg=bg
+highlight CocErrorLine guibg=#504031
+highlight CocWarningLine guibg=#534E3D
 highlight! link CocWarningSign None
 highlight! link CocInfoSign None
 highlight! link CocHintSign None
