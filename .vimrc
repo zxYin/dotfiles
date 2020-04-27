@@ -1,13 +1,17 @@
-set nocompatible
+" =====================================================================
+" URL: https://github.com/zxYin/dotfiles
+" Filename: .vimrc
+" Author: zxYin
+" Email: yinzxpersonal@gmail.com
+" License: MIT License
+" =====================================================================
 
-" Python
-let g:python3_host_prog = "/Users/yinzixin/opt/anaconda3/bin/python"
-let g:python_host_prog = "/usr/bin/python"
+" Plugs: {{{
+set nocompatible
 
 call plug#begin('~/.vim/plugged')
   " UI
   Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
   Plug 'wincent/terminus'
   Plug 'terryma/vim-smooth-scroll'
   Plug 'sainnhe/gruvbox-material'
@@ -33,14 +37,9 @@ call plug#begin('~/.vim/plugged')
   " Go
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
-
-" HardTime
-let g:hardtime_default_on = 1
-let g:list_of_normal_keys = ["h", "j", "k", "l"]
-let g:list_of_visual_keys = ["h", "j", "k", "l"]
-let g:list_of_insert_keys = []
-
-" Performance
+" }}}
+" Settings: {{{
+" Performance: {{{
 set hidden
 set nobackup
 set nowritebackup
@@ -48,8 +47,12 @@ set noswapfile
 set updatetime=100
 set bs=2
 set ma
-
-" Search
+" }}}
+" Python: {{{
+let g:python3_host_prog = "/Users/yinzixin/opt/anaconda3/bin/python"
+let g:python_host_prog = "/usr/bin/python"
+" }}}
+" Search: {{{
 set incsearch       " search as characters are entered
 set hlsearch        " highlight matche
 set ignorecase      " ignore case when searching
@@ -59,12 +62,12 @@ augroup ClearSearch " auto clear highlight
   autocmd!
   autocmd InsertEnter * let @/ = ''
 augroup END
-
-" Tools
+" }}}
+" Tools: {{{
 set clipboard+=unnamedplus
 set nrformats=alpha
-
-" Spaces & Tabs
+" }}}
+" Spaces & Tabs: {{{
 set tabstop=4       " number of visual spaces per TAB
 set softtabstop=4   " number of spaces in tab when editing
 set shiftwidth=4    " number of spaces to use for autoindent
@@ -74,8 +77,8 @@ set copyindent
 set smartindent
 set cindent
 set shiftround     " Use multiple of shiftwidth when indenting with > and <
-
-" UI Config
+" }}}
+" UI Config: {{{
 set number                   " show line number
 set relativenumber           " show relative line number
 set cursorline               " highlight current line
@@ -95,17 +98,18 @@ let g:golden_ratio_autocommand = 0 " dont resize automatically
 " set statusline=\
 " set laststatus=0
 set showcmd
-
-" Window remap
+" }}}
+" Window remap: {{{
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-" Color
+" }}}
+" Color: {{{
 syntax on
 set t_Co=256
 set termguicolors
+
 set background=dark
 let g:gruvbox_material_background = 'soft'
 let g:gruvbox_material_enable_italic = 1
@@ -116,16 +120,9 @@ highlight SignColumn guibg=none
 highlight Normal guibg=none
 highlight NonText guibg=none
 
-" Git Color
-highlight RedSign guibg=none
-highlight GreenSign guibg=none
-highlight BlueSign guibg=none
-highlight PurpleSign guibg=none
-highlight YellowSign guibg=none
-highlight OrangeSign guibg=none
-highlight AquaSign guibg=none
 autocmd FileType json syntax match Comment +\/\/.\+$+
-
+" }}}
+" Clear Space Ending: {{{
 " set lcs+=space:·
 " set list
 " hi Whitespace guifg=#464741
@@ -138,30 +135,47 @@ func! DeleteTrailingWS()
 endfunc
 " auto delete useless spaces
 au BufWrite * :call DeleteTrailingWS()
-
-" Smooth Scroll
+" }}}
+" }}}
+" Plugs Settings: {{{
+" HardTime: {{{
+let g:hardtime_default_on = 1
+let g:list_of_normal_keys = ["h", "j", "k", "l"]
+let g:list_of_visual_keys = ["h", "j", "k", "l"]
+let g:list_of_insert_keys = []
+"}}}
+" Smooth Scroll: {{{
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 4, 1)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 4, 1)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 5, 1)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 5, 1)<CR>
-
-" Go
+" }}}
+" Git Color: {{{
+highlight RedSign guibg=none
+highlight GreenSign guibg=none
+highlight BlueSign guibg=none
+highlight PurpleSign guibg=none
+highlight YellowSign guibg=none
+highlight OrangeSign guibg=none
+highlight AquaSign guibg=none
+" }}}
+" Go: {{{
 let g:go_def_mapping_enabled = 0
-
-" Easy Align
+" }}}
+" Easy Align: {{{
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-" asynctasks & asyncrun
+" }}}
+" asynctasks & asyncrun" {{{
 noremap <silent><F1> :AsyncTask file-build<CR>
 noremap <silent><F2> :AsyncTask file-run<CR>
 let g:asyncrun_open = 6
 let g:asynctasks_term_pos = "bottom"
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
-
-" fzf
+" }}}
+" fzf: {{{
 set rtp+=/usr/local/opt/fzf
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 nmap <c-p> :FZF<CR>
@@ -170,12 +184,12 @@ let g:fzf_colors = {
     \ 'bg+': ['bg+', '#32302F'],
     \ 'info': ['info', '#CBB795'],
     \ 'fg': ['fg', 'Comment'] }
-
-" vim-cpp-modern
+" }}}
+" vim-cpp-modern: {{{
 let g:cpp_simple_highlight = 1
 let g:cpp_named_requirements_highlight = 1
-
-" nerdcommenter
+" }}}
+" nerdcommenter: {{{
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 " Use compact syntax for prettified multi-line comments
@@ -194,11 +208,11 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 nmap <silent><c-_> <leader>c<space>
 vmap <silent><c-_> <leader>c<space>
-
-" file explorer
+" }}}
+" file explorer: {{{
 nnoremap <silent>- :CocCommand explorer --toggle --sources=buffer-,file+<CR>
-
-" Airline
+" }}}
+" Airline: {{{
 function! Coc_get_error_warning()
   let errorMes = airline#extensions#coc#get_error()
   let warningMes = airline#extensions#coc#get_warning()
@@ -214,14 +228,11 @@ function! Coc_get_error_warning()
 endfunction
 
 let g:airline_extensions = ["tabline"]
-let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
-  \%#__restore__#%4l:%2c '
+let g:airline_section_z = '%2p%% %#__accent_bold#%{g:airline_symbols.linenr}
+  \%#__restore__#%3l:%2c'
 " let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
 "   \%4l:%2c%#__restore__#  %{strftime("%H:%M")}'
-
 let g:airline_section_b                            = '%{Coc_get_error_warning()}'
-let g:airline#extensions#coc#error_symbol          = 'E: '
-let g:airline#extensions#coc#warning_symbol        = 'W: '
 " let g:airline#parts#ffenc#skip_expected_string     = 'utf-8[unix]'
 let g:airline#extensions#tabline#enabled           = 1
 let g:airline#extensions#tabline#formatter         = 'unique_tail_improved'
@@ -235,10 +246,10 @@ let g:airline#extensions#tabline#show_close_button = 0
 let g:airline_left_alt_sep                         = ' '
 let g:airline#extensions#tabline#left_alt_sep      = ' '
 
-highlight! airline_tabsel gui=none cterm=none term=none
-highlight! link airline_tablabel airline_tabsel
-
-" Vimspector
+" highlight! airline_tabsel gui=none cterm=none term=none
+" highlight! link airline_tablabel airline_tabsel
+" }}}
+" Vimspector: {{{
 " let g:vimspector_enable_mappings = 'HUMAN'
 nmap <silent><F5> <Plug>VimspectorContinue
 nmap <silent><F3> :VimspectorReset<CR>
@@ -252,9 +263,8 @@ nmap <silent><F12> <Plug>VimspectorStepOut
 sign define vimspectorBP text=● texthl=Statement
 sign define vimspectorBPDisabled text=◯ texthl=Statement
 sign define vimspectorPC text=▶ texthl=CursorLineNr
-
-" Coc
-
+" }}}
+" Coc: {{{
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -388,3 +398,7 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+" }}}
+" }}}
+
+" vim: set sw=2 ts=2 sts=2 et tw=80 ft=vim fdm=marker fmr={{{,}}}:
