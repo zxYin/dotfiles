@@ -11,31 +11,32 @@ set nocompatible
 
 call plug#begin('~/.vim/plugged')
   " UI
-  Plug 'vim-airline/vim-airline'
+  Plug 'itchyny/lightline.vim'
+  Plug 'mengelbrecht/lightline-bufferline'
   Plug 'wincent/terminus'
   Plug 'terryma/vim-smooth-scroll'
   Plug 'sainnhe/gruvbox-material'
+  Plug 'ryanoasis/vim-devicons'
   " Tools
   Plug 'junegunn/vim-easy-align'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'triglav/vim-visual-increment'
   Plug 'takac/vim-hardtime'
-  " File
-  Plug 'ryanoasis/vim-devicons'
+  Plug 'justinmk/vim-sneak'
   " Comment
   Plug 'preservim/nerdcommenter'
-  " Complition
+ " General
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  " C++
   Plug 'puremourning/vimspector'
   Plug 'skywind3000/asynctasks.vim'
   Plug 'skywind3000/asyncrun.vim'
+  " C++
   Plug 'bfrg/vim-cpp-modern'
   " Markdown
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
   " Go
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 call plug#end()
 " }}}
 " Settings: {{{
@@ -68,10 +69,11 @@ set clipboard+=unnamedplus
 set nrformats=alpha
 " }}}
 " Spaces & Tabs: {{{
-set tabstop=4       " number of visual spaces per TAB
-set softtabstop=4   " number of spaces in tab when editing
-set shiftwidth=4    " number of spaces to use for autoindent
-set expandtab       " tabs are space
+let tabsize=4
+let &tabstop=tabsize       " numdiffChangedber of visual spaces per TAB
+let &softtabstop=tabsize   " number of spaces in tab when editing
+let &shiftwidth=tabsize    " number of spaces to use for autoindent
+set expandtab              " tabs are space
 set autoindent
 set copyindent
 set smartindent
@@ -83,7 +85,8 @@ set number                   " show line number
 set relativenumber           " show relative line number
 set cursorline               " highlight current line
 set wildmenu                 " visual autocomplete for command menu
-set laststatus=2             " window will always have a status line
+set laststatus=2             " always show status line
+set showtabline=2            " always show tab line
 set shortmess+=c             " don't pass messages to ins-completion-menu
 set colorcolumn=81           " set guide line
 set linebreak                " set line break
@@ -91,13 +94,10 @@ set breakindent              " get same indent as before
 set numberwidth=5            " make the line number column wider
 set signcolumn=yes           " always show signcolumns
 set scrolloff=6              " Keep 10 lines above/below cursor
-set noshowmode               " remove status line
+set noshowmode               " remove mode
 " set fillchars=vert:\ ,eob:\            " remove ~ at endBuffer
 set fillchars=eob:\            " remove ~ at endBuffer
 let g:golden_ratio_autocommand = 0 " dont resize automatically
-" set noruler
-" set statusline=\
-" set laststatus=0
 set showcmd
 " }}}
 " Window remap: {{{
@@ -113,7 +113,9 @@ set termguicolors
 
 set background=dark
 let g:gruvbox_material_background = 'soft'
-let g:gruvbox_material_enable_italic = 1
+let g:gruvbox_material_enable_italic = 0
+let g:gruvbox_material_disable_italic_comment = 0
+
 colorscheme gruvbox-material
 
 highlight CursorLineNr guifg=#A9B665 gui=bold guibg=none
@@ -163,6 +165,16 @@ highlight AquaSign guibg=none
 " }}}
 " Go: {{{
 let g:go_def_mapping_enabled = 0
+" }}}
+" Sneak: {{{
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
+let g:sneak#s_next = 1
+let g:sneak#label = 1
+let g:sneak#t_reset = 1
+highlight! link SneakScope DiffText
 " }}}
 " Easy Align: {{{
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -214,40 +226,6 @@ vmap <silent><c-_> <leader>c<space>
 " file explorer: {{{
 nnoremap <silent>- :CocCommand explorer --toggle --sources=buffer-,file+<CR>
 " }}}
-" Airline: {{{
-function! Coc_get_error_warning()
-  let errorMes = airline#extensions#coc#get_error()
-  let warningMes = airline#extensions#coc#get_warning()
-  if errorMes != '' && warningMes != ''
-    return " ".errorMes."  ".warningMes." "
-  elseif errorMes != ''
-    return " ".errorMes." "
-  elseif warningMes != ''
-    return " ".warningMes." "
-  else
-    return ''
-  endif
-endfunction
-
-let g:airline_extensions = ["tabline"]
-let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
-  \%#__restore__#%4l:%2c'
-" let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}
-"   \%4l:%2c%#__restore__#  %{strftime("%H:%M")}'
-let g:airline_section_b                            = '%{Coc_get_error_warning()}'
-" let g:airline#parts#ffenc#skip_expected_string     = 'utf-8[unix]'
-let g:airline#extensions#tabline#enabled           = 1
-let g:airline#extensions#tabline#formatter         = 'unique_tail_improved'
-let g:airline_theme                                = 'gruvbox_material'
-let g:airline_highlighting_cache                   = 1
-let g:airline#extensions#tabline#tabs_label        = ''
-let g:airline#extensions#tabline#buffers_label     = '%{strftime("%H:%M")}'
-
-let g:airline#extensions#tabline#show_close_button = 0
-
-let g:airline_left_alt_sep                         = ' '
-let g:airline#extensions#tabline#left_alt_sep      = ' '
-" }}}
 " Vimspector: {{{
 " let g:vimspector_enable_mappings = 'HUMAN'
 nmap <silent><F5> <Plug>VimspectorContinue
@@ -263,6 +241,84 @@ highlight VimSpectorBreakPoint guifg=#EA6962
 sign define vimspectorBP text=● texthl=VimSpectorBreakPoint
 sign define vimspectorBPDisabled text=◯ texthl=VimSpectorBreakPoint
 sign define vimspectorPC text=▶ texthl=CursorLineNr
+" }}}
+" Lightline: {{{
+let g:lightline = {
+  \ 'colorscheme' : 'gruvbox_material',
+  \ 'active': {
+  \   'left': [
+  \     [ 'mode', 'paste' ],
+  \     [ 'cocInfo' ],
+  \     [ 'readonly', 'relativepath' ]
+  \   ],
+  \   'right': [
+  \     [ 'indexinfo' ],
+  \     [ 'fileencoding' ],
+  \     [ 'filetype' ]
+  \   ]
+  \ },
+  \ 'tabline': {
+  \   'left': [ [ 'buffers'] ],
+  \   'right': [ [ 'time' ] ]
+  \ },
+  \ 'inactive': {
+  \   'right': [ [ 'indexinfo' ] ]
+  \ },
+  \ 'component_function': {
+  \   'fileencoding': 'LightlineFileEncoding',
+  \   'filetype': 'LightlineFiletype',
+  \   'cocInfo': 'LightlineCocInfo'
+  \ },
+  \ 'component_expand': {'buffers': 'lightline#bufferline#buffers' },
+  \ 'component_type': { 'buffers': 'tabsel' },
+  \ 'component_raw': { 'buffers': 1 },
+  \ 'component': {
+  \   'indexinfo': '%3p%% ☰  %3l:%2c ',
+  \   'time': '%{strftime("%H:%M")}'
+  \ },
+\ }
+
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#clickabl = 1
+let g:lightline#bufferline#unnamed = '[No Name]'
+
+function! LightlineFileEncoding()
+  return ' '.(winwidth(0) > 70 ? &fileencoding.' ' : '').WebDevIconsGetFileFormatSymbol().' '
+endfunction
+
+function! LightlineFiletype()
+  return (winwidth(0) > 70 ? &filetype.' ' : '').WebDevIconsGetFileTypeSymbol().' '
+endfunction
+
+function! CocGetInfo(type) abort
+  let _backup = get(g:, 'coc_stl_format', '')
+  let is_err = (a:type  is# 'error')
+
+  let info = get(b:, 'coc_diagnostic_info', {})
+  let cnt = get(info, a:type, 0)
+  if empty(info) || empty(cnt) | return '' | endif
+
+  if !empty(_backup)
+    let g:coc_stl_format = _backup
+  endif
+
+  return (a:type  is# 'error' ? 'E:' : 'W:').cnt
+endfunction
+
+function! LightlineCocInfo()
+  let errorMes = CocGetInfo('error')
+  let warningMes = CocGetInfo('warning')
+
+  let msg = ''
+  if errorMes != ''
+    let msg = msg.' '.errorMes.' '
+  endif
+
+  if warningMes != ''
+    let msg = msg.' '.warningMes.' '
+  endif
+  return msg
+endfunction
 " }}}
 " Coc: {{{
 " Use <c-space> to trigger completion.
@@ -303,9 +359,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" " Formatting selected code.
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
