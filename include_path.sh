@@ -18,7 +18,7 @@ export PATH=/usr/local/bin:$PATH
 # Go
 export GOPATH="${HOME}/.go"
 export GOROOT="/usr/local/Cellar/go/1.14.2_1/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
 # # Openjdk
 # export PATH="/usr/local/opt/openjdk/bin:$PATH"
 # # Java

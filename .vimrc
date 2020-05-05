@@ -13,24 +13,27 @@ call plug#begin('~/.vim/plugged')
   " UI
   Plug 'itchyny/lightline.vim'
   Plug 'mengelbrecht/lightline-bufferline'
-  Plug 'wincent/terminus'
   Plug 'terryma/vim-smooth-scroll'
   Plug 'sainnhe/gruvbox-material'
   Plug 'ryanoasis/vim-devicons'
   " Tools
+  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+  Plug 'junegunn/vim-slash'
   Plug 'junegunn/vim-easy-align'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
-  Plug 'triglav/vim-visual-increment'
-  Plug 'takac/vim-hardtime'
   Plug 'justinmk/vim-sneak'
+  Plug 'junegunn/fzf', { 'on': ['Files', 'Marks', 'Maps', 'Buffers'] }
+  Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Marks', 'Maps', 'Buffers'] }
   " Comment
   Plug 'preservim/nerdcommenter'
  " General
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'puremourning/vimspector'
-  Plug 'skywind3000/asynctasks.vim'
-  Plug 'skywind3000/asyncrun.vim'
+  Plug 'skywind3000/asynctasks.vim', { 'on': 'AsyncTask' }
+  Plug 'skywind3000/asyncrun.vim', { 'on': 'AsyncTask' }
+  " Latex
+  Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex', 'on': 'LLPStartPreview' }
   " C++
   Plug 'bfrg/vim-cpp-modern'
   " Markdown
@@ -46,7 +49,8 @@ set nobackup
 set nowritebackup
 set noswapfile
 set updatetime=100
-set bs=2
+set bs=2            " can use backspace
+set mouse=a         " can use mouse
 set ma
 " }}}
 " Python: {{{
@@ -58,11 +62,6 @@ set incsearch       " search as characters are entered
 set hlsearch        " highlight matche
 set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is lower case
-
-augroup ClearSearch " auto clear highlight
-  autocmd!
-  autocmd InsertEnter * let @/ = ''
-augroup END
 " }}}
 " Tools: {{{
 set clipboard+=unnamedplus
@@ -142,12 +141,13 @@ au BufWrite * :call DeleteTrailingWS()
 " }}}
 " }}}
 " Plugs Settings: {{{
-" HardTime: {{{
-let g:hardtime_default_on = 1
-let g:list_of_normal_keys = ["h", "j", "k", "l"]
-let g:list_of_visual_keys = ["h", "j", "k", "l"]
-let g:list_of_insert_keys = []
-"}}}
+" vim-slash: {{{
+noremap <plug>(slash-after) zz
+augroup ClearSearch " auto clear highlight
+  autocmd!
+  autocmd InsertEnter * let @/ = ''
+augroup END
+" }}}
 " Smooth Scroll: {{{
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 4, 1)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 4, 1)<CR>
@@ -176,6 +176,10 @@ let g:sneak#label = 1
 let g:sneak#t_reset = 1
 highlight! link SneakScope DiffText
 " }}}
+" Latex Preview: {{{
+let g:livepreview_cursorhold_recompile = 0
+let g:livepreview_previewer = 'open'
+" }}}
 " Easy Align: {{{
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -190,9 +194,8 @@ let g:asynctasks_term_pos = "bottom"
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
 " }}}
 " fzf: {{{
-set rtp+=/usr/local/opt/fzf
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-nmap <c-p> :FZF<CR>
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+nmap <c-p> :Files<CR>
 let g:fzf_colors = {
     \ 'border': ['border', '#32302F'],
     \ 'bg+': ['bg+', '#32302F'],
@@ -283,11 +286,13 @@ let g:lightline#bufferline#clickabl = 1
 let g:lightline#bufferline#unnamed = '[No Name]'
 
 function! LightlineFileEncoding()
-  return ' '.(winwidth(0) > 70 ? &fileencoding.' ' : '').WebDevIconsGetFileFormatSymbol().' '
+  return ' '.(winwidth(0) > 70 && &fileencoding != '' ? &fileencoding.' ' : '')
+    \ .WebDevIconsGetFileFormatSymbol().' '
 endfunction
 
 function! LightlineFiletype()
-  return (winwidth(0) > 70 ? &filetype.' ' : '').WebDevIconsGetFileTypeSymbol().' '
+  return (winwidth(0) > 70 ? &filetype.' ' : '')
+    \ .WebDevIconsGetFileTypeSymbol().' '
 endfunction
 
 function! CocGetInfo(type) abort
