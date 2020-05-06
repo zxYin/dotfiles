@@ -1,5 +1,5 @@
 # source ~/.bash_profile
-source ~/.dotfiles/include_path.sh
+source ~/.dotfiles/scripts/include_path.sh
 
 fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
@@ -56,7 +56,7 @@ EOPLUGINS
   zgen save
 fi
 
-source ~/.dotfiles/custom.sh
+source ~/.dotfiles/scripts/custom.sh
 
 bindkey -v
 bindkey '^[[A' history-beginning-search-backward
