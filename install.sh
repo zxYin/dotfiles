@@ -13,4 +13,4 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # install brew packages
-sudo ./brew.sh
+sudo ./scripts/brew.sh
