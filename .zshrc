@@ -67,5 +67,5 @@ KEYTIMEOUT=1
 
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
-source ~/zshfiles/zsh-interactive-cd.plugin.zsh
+source ~/zsh/zsh-interactive-cd.plugin.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
