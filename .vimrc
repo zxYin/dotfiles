@@ -18,13 +18,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'ryanoasis/vim-devicons'
   " Tools
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-  Plug 'junegunn/vim-slash'
   Plug 'junegunn/vim-easy-align'
+  Plug 'junegunn/fzf', { 'on': ['Files', 'Marks', 'Maps', 'Buffers'] }
+  Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Marks', 'Maps', 'Buffers'] }
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'justinmk/vim-sneak'
-  Plug 'junegunn/fzf', { 'on': ['Files', 'Marks', 'Maps', 'Buffers'] }
-  Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Marks', 'Maps', 'Buffers'] }
   " Comment
   Plug 'preservim/nerdcommenter'
  " General
@@ -37,7 +36,7 @@ call plug#begin('~/.vim/plugged')
   " C++
   Plug 'bfrg/vim-cpp-modern'
   " Markdown
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+  Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'do': 'cd app & yarn install' }
   " Go
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 call plug#end()
@@ -49,7 +48,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set updatetime=100
-set bs=2            " can use backspace
+" set bs=2            " can use backspace
 set mouse=a         " can use mouse
 set ma
 " }}}
@@ -62,6 +61,12 @@ set incsearch       " search as characters are entered
 set hlsearch        " highlight matche
 set ignorecase      " ignore case when searching
 set smartcase       " ignore case if search pattern is lower case
+
+augroup ClearSearch " auto clear highlight
+  autocmd!
+  autocmd InsertEnter * let @/ = ''
+augroup END
+
 " }}}
 " Tools: {{{
 set clipboard+=unnamedplus
@@ -141,13 +146,6 @@ au BufWrite * :call DeleteTrailingWS()
 " }}}
 " }}}
 " Plugs Settings: {{{
-" vim-slash: {{{
-noremap <plug>(slash-after) zz
-augroup ClearSearch " auto clear highlight
-  autocmd!
-  autocmd InsertEnter * let @/ = ''
-augroup END
-" }}}
 " Smooth Scroll: {{{
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 4, 1)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 4, 1)<CR>

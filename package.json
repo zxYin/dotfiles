@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "coc-cmake": ">=0.0.1",
-    "coc-explorer": ">=0.5.3",
+    "coc-explorer": ">=0.5.4",
     "coc-git": ">=1.7.11",
     "coc-highlight": ">=1.2.5",
     "coc-java": ">=1.4.10",
