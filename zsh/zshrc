@@ -1,4 +1,5 @@
-# source ~/.bash_profile
+source ~/.bash_profile
+export EDITOR=nvim
 source ~/.dotfiles/scripts/include_path.sh
 
 fpath+=$HOME/.zsh/pure

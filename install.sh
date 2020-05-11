@@ -7,6 +7,7 @@ ln -sf ~/.dotfiles/bash_profile ~/.bash_profile
 ln -sf ~/.dotfiles/ctags ~/.ctags
 ln -sf ~/.dotfiles/gdbinit ~/.gdbinit
 ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
+ln -sf ~/.dotfiles/ranger ~/.config/ranger
 
 # install vim-plug
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \

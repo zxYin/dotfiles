@@ -26,6 +26,7 @@ brew install ccls
 brew install cmake
 brew install curl
 brew install fd
+brew install ffmpegthumbnailer
 brew install flex
 brew install fzf
 brew install gcc
@@ -43,6 +44,7 @@ brew install openssh
 brew install perl
 brew install python
 brew install qt
+brew install ranger
 brew install ruby
 brew install tree
 brew install tty-clock

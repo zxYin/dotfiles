@@ -14,7 +14,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'mengelbrecht/lightline-bufferline'
   Plug 'terryma/vim-smooth-scroll'
-  Plug 'sainnhe/gruvbox-material'
+  Plug 'sainnhe/gruvbox-material', { 'do': 'rm -r ftplugin &> /dev/null' }
   Plug 'ryanoasis/vim-devicons'
   " Tools
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
@@ -23,7 +23,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Marks', 'Maps', 'Buffers'] }
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
-  Plug 'justinmk/vim-sneak'
   " Comment
   Plug 'preservim/nerdcommenter'
  " General
@@ -115,15 +114,14 @@ syntax on
 set t_Co=256
 set termguicolors
 
-set background=dark
 let g:gruvbox_material_background = 'soft'
-let g:gruvbox_material_enable_italic = 0
-let g:gruvbox_material_disable_italic_comment = 0
+let g:gruvbox_material_better_performance = 1
+let g:gruvbox_material_diagnostic_line_highlight = 1
+let g:gruvbox_material_sign_column_background = 'none'
 
 colorscheme gruvbox-material
 
 highlight CursorLineNr guifg=#A9B665 gui=bold guibg=none
-highlight SignColumn guibg=none
 highlight Normal guibg=none
 highlight NonText guibg=none
 highlight VertSplit guifg=#46413E
@@ -163,16 +161,6 @@ highlight AquaSign guibg=none
 " }}}
 " Go: {{{
 let g:go_def_mapping_enabled = 0
-" }}}
-" Sneak: {{{
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
-let g:sneak#s_next = 1
-let g:sneak#label = 1
-let g:sneak#t_reset = 1
-highlight! link SneakScope DiffText
 " }}}
 " Latex Preview: {{{
 let g:livepreview_cursorhold_recompile = 0
@@ -424,8 +412,6 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-highlight CocErrorLine guibg=#504031
-highlight CocWarningLine guibg=#534E3D
 highlight! link CocWarningSign None
 highlight! link CocInfoSign None
 highlight! link CocHintSign None
