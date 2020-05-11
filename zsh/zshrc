@@ -40,6 +40,9 @@ _fzf_comprun() {
   esac
 }
 
+# ranger
+export RANGER_LOAD_DEFAULT_RC=false
+
 source "${HOME}/.zgen/zgen.zsh"
 
 if ! zgen saved; then
