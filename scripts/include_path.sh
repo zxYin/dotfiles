@@ -24,6 +24,9 @@ export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
 # # Java
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk-13.jdk/Contents/Home
 export PATH="$JAVA_HOME/bin:$PATH"
+
+# Flutter
+export PATH="$PATH:${HOME}/flutter/bin"
 # RUBUG
 # export PATH="/usr/local/opt/ruby/bin:$PATH"
 
