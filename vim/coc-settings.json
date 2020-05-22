@@ -67,8 +67,8 @@
     "git.changeRemovedSign.text": "▁",
     "git.topRemovedSign.text": "▔",
     "explorer.keyMappings": {
-        "s": "unmap",
-        "E": "unmap",
+        "s": false,
+        "E": false,
         "<c-x>": "open:split",
         "<c-v>": "open:vsplit"
     },
