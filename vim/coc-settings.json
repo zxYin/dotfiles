@@ -53,6 +53,7 @@
         "line_length": false,
         "MD001": false
     },
+    "tsserver.npm": "/usr/bin/npm",
     "suggest.enablePreview": true,
     "suggest.noselect": false,
     "python.autoComplete.addBrackets": true,
