@@ -22,11 +22,15 @@ export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
 # # Openjdk
 # export PATH="/usr/local/opt/openjdk/bin:$PATH"
 # # Java
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk-13.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_251.jdk/Contents/Home
 export PATH="$JAVA_HOME/bin:$PATH"
 
 # Flutter
 export PATH="$PATH:${HOME}/flutter/bin"
+export PUB_HOSTED_URL=https://pub.flutter-io.cn
+export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+
 # RUBUG
 # export PATH="/usr/local/opt/ruby/bin:$PATH"
 

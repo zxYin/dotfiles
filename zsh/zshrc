@@ -9,6 +9,7 @@ zstyle :prompt:pure:path color cyan
 prompt pure
 
 alias vim='nvim'
+alias npm='cnpm'
 alias trash="rmtrash"
 alias rm="echo Use 'trash', or the full path i.e. '/bin/rm'"
 
@@ -73,3 +74,5 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 source ~/.dotfiles/zsh/zsh-interactive-cd.plugin.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;

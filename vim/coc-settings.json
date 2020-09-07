@@ -55,6 +55,9 @@
     },
     "suggest.enablePreview": true,
     "suggest.noselect": false,
+    "coc.preferences.formatOnSaveFiletypes": [
+        "dart"
+    ],
     "python.autoComplete.addBrackets": true,
     "python.pythonPath": "/usr/local/bin/python3.7",
     "python.jediEnabled": false,
