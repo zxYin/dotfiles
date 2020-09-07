@@ -53,6 +53,11 @@
         "line_length": false,
         "MD001": false
     },
+    "tsserver.npm": "/usr/bin/npm",
+    "diagnostic.errorSign": "",
+    "diagnostic.warningSign": "",
+    "diagnostic.infoSign": "",
+    "diagnostic.hintSign": "",
     "suggest.enablePreview": true,
     "suggest.noselect": false,
     "coc.preferences.formatOnSaveFiletypes": [

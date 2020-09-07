@@ -23,7 +23,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf.vim', { 'on': ['Files', 'Marks', 'Maps', 'Buffers'] }
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
-  " Comment
+  Plug 'tpope/vim-fugitive'
+  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+  Plug 'justinmk/vim-sneak'
   Plug 'preservim/nerdcommenter'
  " General
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -32,6 +34,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'skywind3000/asyncrun.vim', { 'on': 'AsyncTask' }
   " Latex
   Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex', 'on': 'LLPStartPreview' }
+  " Python
+  Plug 'tell-k/vim-autopep8'
   " C++
   Plug 'bfrg/vim-cpp-modern'
   " Markdown
@@ -42,6 +46,13 @@ call plug#begin('~/.vim/plugged')
   " Flutter
   Plug 'thosakwe/vim-flutter'
   Plug 'dart-lang/dart-vim-plugin'
+  " Typescript
+  Plug 'leafgarland/typescript-vim'
+  Plug 'ianks/vim-tsx'
+  Plug 'prettier/vim-prettier', {
+    \ 'do': 'npm install',
+    \ 'branch': 'release/0.x'
+    \ }
 call plug#end()
 " }}}
 " Settings: {{{
@@ -122,13 +133,19 @@ let g:gruvbox_material_background = 'soft'
 let g:gruvbox_material_better_performance = 1
 let g:gruvbox_material_diagnostic_line_highlight = 1
 let g:gruvbox_material_sign_column_background = 'none'
+let g:gruvbox_material_transparent_background = 1
+let g:gruvbox_material_current_word = 'grey background'
+
+augroup GruvboxMaterialCustom
+  autocmd!
+  autocmd ColorScheme gruvbox-material call SetColorOptions()
+  function SetColorOptions()
+    highlight CursorLineNr guifg=#A9B665 gui=bold guibg=none
+    highlight VertSplit guifg=#46413E
+  endfunction
+augroup END
 
 colorscheme gruvbox-material
-
-highlight CursorLineNr guifg=#A9B665 gui=bold guibg=none
-highlight Normal guibg=none
-highlight NonText guibg=none
-highlight VertSplit guifg=#46413E
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 " }}}
@@ -165,6 +182,21 @@ highlight AquaSign guibg=none
 " }}}
 " Go: {{{
 let g:go_def_mapping_enabled = 0
+" }}}
+" Prettier: {{{
+let g:prettier#autoformat = 0
+let g:prettier#exec_cmd_async = 1
+autocmd FileType typescript,typescript.tsx,javascript,javascript.tsx noremap <buffer> <leader>fm :PrettierAsync<CR>
+" }}}
+" Autopep8: {{{
+autocmd FileType python noremap <buffer> <leader>fm :call Autopep8()<CR>
+let g:autopep8_disable_show_diff=1
+" }}}
+" Sneak: {{{
+map f <Plug>Sneak_f
+map F <Plug>Sneak_F
+map t <Plug>Sneak_t
+map T <Plug>Sneak_T
 " }}}
 " Latex Preview: {{{
 let g:livepreview_cursorhold_recompile = 0
