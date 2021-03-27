@@ -53,7 +53,7 @@
         "line_length": false,
         "MD001": false
     },
-    "tsserver.npm": "/usr/bin/npm",
+    "tsserver.npm": "/usr/local/bin/cnpm",
     "diagnostic.errorSign": "",
     "diagnostic.warningSign": "",
     "diagnostic.infoSign": "",
@@ -64,7 +64,7 @@
         "dart"
     ],
     "python.autoComplete.addBrackets": true,
-    "python.pythonPath": "/usr/local/bin/python3.7",
+    "python.pythonPath": "/Users/yinzixin/opt/anaconda3/bin/python",
     "python.jediEnabled": false,
     "python.condaPath": "/Users/yinzixin/opt/anaconda3/bin/python",
     "java.completion.guessMethodArguments": true,

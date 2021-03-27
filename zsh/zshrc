@@ -1,5 +1,6 @@
 source ~/.bash_profile
 export EDITOR=nvim
+export HOMEBREW_FORCE_BREWED_CURL=1
 source ~/.dotfiles/scripts/include_path.sh
 
 fpath+=$HOME/.zsh/pure
@@ -11,7 +12,6 @@ prompt pure
 alias vim='nvim'
 alias npm='cnpm'
 alias trash="rmtrash"
-alias rm="echo Use 'trash', or the full path i.e. '/bin/rm'"
 
 # fzf
 export FZF_BASE=/usr/local/opt/fzf
@@ -75,4 +75,4 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 source ~/.dotfiles/zsh/zsh-interactive-cd.plugin.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;
+export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;

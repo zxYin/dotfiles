@@ -54,6 +54,8 @@ brew install xz
 brew install yarn
 brew install zplug
 brew install zsh
+brew install scala
+brew install apache-spark
 
 # Remove outdated versions from the cellar.
 brew cleanup

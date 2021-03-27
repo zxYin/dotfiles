@@ -24,7 +24,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-fugitive'
-  Plug 'mg979/vim-visual-multi', {'branch': 'master'}
   Plug 'justinmk/vim-sneak'
   Plug 'preservim/nerdcommenter'
  " General
@@ -35,7 +34,7 @@ call plug#begin('~/.vim/plugged')
   " Latex
   Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex', 'on': 'LLPStartPreview' }
   " Python
-  Plug 'tell-k/vim-autopep8'
+  Plug 'tell-k/vim-autopep8', { 'for': 'python' }
   " C++
   Plug 'bfrg/vim-cpp-modern'
   " Markdown
@@ -44,14 +43,15 @@ call plug#begin('~/.vim/plugged')
   " Go
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
   " Flutter
-  Plug 'thosakwe/vim-flutter'
+  Plug 'thosakwe/vim-flutter', { 'for': 'dart' }
   Plug 'dart-lang/dart-vim-plugin'
   " Typescript
   Plug 'leafgarland/typescript-vim'
   Plug 'ianks/vim-tsx'
   Plug 'prettier/vim-prettier', {
     \ 'do': 'npm install',
-    \ 'branch': 'release/0.x'
+    \ 'branch': 'release/0.x',
+    \ 'on': 'PrettierAsync'
     \ }
 call plug#end()
 " }}}
