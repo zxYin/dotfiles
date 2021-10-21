@@ -10,7 +10,7 @@ zstyle :prompt:pure:path color cyan
 prompt pure
 
 alias vim='nvim'
-alias npm='cnpm'
+# alias npm='cnpm'
 alias trash="rmtrash"
 
 # fzf
@@ -75,4 +75,5 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 source ~/.dotfiles/zsh/zsh-interactive-cd.plugin.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;
+# export http_proxy=http://127.0.0.1:1087;export https_proxy=http://127.0.0.1:1087;
+# export http_proxy=http://127.0.0.1:4780;export https_proxy=http://127.0.0.1:4780;

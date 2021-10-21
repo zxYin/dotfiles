@@ -61,14 +61,16 @@
     "suggest.enablePreview": true,
     "suggest.noselect": false,
     "coc.preferences.formatOnSaveFiletypes": [
-        "dart"
+        "dart",
+        "scala"
     ],
+    "coc.preferences.formatOnType": true,
     "python.autoComplete.addBrackets": true,
     "python.pythonPath": "/Users/yinzixin/opt/anaconda3/bin/python",
     "python.jediEnabled": false,
     "python.condaPath": "/Users/yinzixin/opt/anaconda3/bin/python",
     "java.completion.guessMethodArguments": true,
-    "java.home": "/Library/Java/JavaVirtualMachines/openjdk-13.jdk/Contents/Home",
+    "java.home": "/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home",
     "git.changedSign.text": "▌",
     "git.addedSign.text": "▌",
     "git.removedSign.text": "▁",

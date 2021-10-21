@@ -19,15 +19,14 @@ export PATH=/usr/local/bin:$PATH
 export GOPATH="${HOME}/.go"
 export GOROOT="/usr/local/opt/go/libexec"
 export PATH="$PATH:$GOPATH/bin:$GOROOT/bin"
-# # Openjdk
-# export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
 # # Java
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_251.jdk/Contents/Home
 export PATH="$JAVA_HOME/bin:$PATH"
 
 # # Openjdk
-export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
 # Flutter
 export PATH="$PATH:${HOME}/flutter/bin"
